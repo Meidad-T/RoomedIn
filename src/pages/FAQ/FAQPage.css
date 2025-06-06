@@ -1,0 +1,62 @@
+.faq-page {
+  min-height: 100vh;
+  background: #ffffff;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.faq-main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Global smooth scrolling for FAQ page */
+.faq-page * {
+  scroll-behavior: smooth;
+}
+
+/* Ensure proper spacing and layout */
+.faq-page .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Custom scrollbar for FAQ page */
+.faq-page::-webkit-scrollbar {
+  width: 8px;
+}
+
+.faq-page::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.faq-page::-webkit-scrollbar-thumb {
+  background: var(--primary-green);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.faq-page::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-green-dark);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .faq-page .container {
+    padding: 0 0.5rem;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .faq-page *,
+  .faq-page *::before,
+  .faq-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
