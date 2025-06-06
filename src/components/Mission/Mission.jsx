@@ -25,13 +25,13 @@ const Mission = () => {
           </div>
           <div className="mission-description">
             <p>
-              At RoomedIn, we believe that finding the perfect place to live during your university years 
-              should be simple, safe, and stress-free. We connect students with verified housing options 
-              and trusted roommates, creating a community where academic success and personal growth thrive.
+              At RoomedIn, we believe that finding the perfect roommate is just as important as findding the perfect place to live during your university years. 
+              Our mission is to ensure the entire process is simple, safe, and stress-free. We connect students with others who are actively looking for roommates, 
+               creating a community where academic success and personal growth thrive.
             </p>
             <p>
               Our platform empowers students to make informed decisions about their living arrangements, 
-              ensuring they can focus on what matters most - their education and future.
+              ensuring they can focus on what matters most - their education and future. And the best part? it is 100% FREE forever.
             </p>
           </div>
         </div>

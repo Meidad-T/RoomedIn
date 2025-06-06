@@ -8,7 +8,25 @@ const Header = () => {
           {/* Logo */}
           <div className="logo">
             <div className="logo-icon">
-              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <img
+                src="/src/assets/images/Nav_bar_logo.png"
+                alt="RoomedIn Logo"
+                className="logo-image"
+                onError={(e) => {
+                  // Fallback to SVG if image not found
+                  e.target.style.display = 'none';
+                  e.target.nextElementSibling.style.display = 'block';
+                }}
+              />
+              <svg
+                width="40"
+                height="40"
+                viewBox="0 0 40 40"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ display: 'none' }}
+                className="logo-fallback"
+              >
                 <circle cx="20" cy="20" r="18" fill="var(--primary-green)" stroke="var(--primary-green-dark)" strokeWidth="2"/>
                 <path d="M12 16h16v12H12V16z" fill="white" stroke="var(--primary-green-dark)" strokeWidth="1.5"/>
                 <path d="M16 12v4M24 12v4" stroke="white" strokeWidth="2" strokeLinecap="round"/>
@@ -17,7 +35,6 @@ const Header = () => {
                 <path d="M16 24h8" stroke="var(--primary-green-dark)" strokeWidth="1.5" strokeLinecap="round"/>
               </svg>
             </div>
-            <span className="logo-text">RoomedIn</span>
           </div>
 
           {/* Navigation */}
