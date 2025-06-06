@@ -31,6 +31,16 @@
   justify-content: center;
 }
 
+.logo-image {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo-fallback {
+  display: none;
+}
+
 .logo-text {
   font-size: 1.5rem;
   font-weight: 700;
