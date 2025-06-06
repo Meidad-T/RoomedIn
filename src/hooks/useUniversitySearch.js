@@ -58,7 +58,6 @@ export const useUniversitySearch = (debounceMs = 250) => {
    * Handle search text change with optimized debouncing
    */
   const handleSearchChange = useCallback((newSearchText) => {
-    console.log('Search text changed:', newSearchText)
     setSearchText(newSearchText)
 
     // Clear previous timeout
@@ -71,7 +70,6 @@ export const useUniversitySearch = (debounceMs = 250) => {
 
     // Set new debounced search
     debounceTimeoutRef.current = setTimeout(() => {
-      console.log('Performing search for:', newSearchText)
       performSearch(newSearchText)
     }, debounceMs)
   }, [performSearch, debounceMs])

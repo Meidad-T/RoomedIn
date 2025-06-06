@@ -42,15 +42,11 @@ export class UniversityService {
    * Memory Complexity: O(1) with bounded cache
    */
   static async searchUniversities(searchText) {
-    console.log('UniversityService.searchUniversities called with:', searchText)
-
     if (!searchText || searchText.trim().length < 2) {
-      console.log('Search text too short, returning empty array')
       return []
     }
 
     const searchQuery = searchText.toLowerCase().trim()
-    console.log('Processed query:', searchQuery)
 
     // Clean cache periodically
     this.cleanCache()
@@ -60,13 +56,11 @@ export class UniversityService {
     if (this.searchCache.has(cacheKey)) {
       const cached = this.searchCache.get(cacheKey)
       if (Date.now() - cached.timestamp < this.CACHE_DURATION) {
-        console.log('Returning cached results:', cached.results)
         return cached.results
       }
     }
 
     try {
-      console.log('Making Firebase query...')
       // Firestore query with index - O(log n)
       const universitiesRef = collection(db, this.COLLECTION_NAME)
 
@@ -78,13 +72,11 @@ export class UniversityService {
       )
 
       const querySnapshot = await getDocs(q)
-      console.log('Firebase query returned:', querySnapshot.docs.length, 'documents')
 
       // Convert to University objects
-      const universities = querySnapshot.docs.map(doc => {
-        console.log('Document data:', doc.id, doc.data())
-        return University.fromFirestore(doc)
-      })
+      const universities = querySnapshot.docs.map(doc =>
+        University.fromFirestore(doc)
+      )
 
       // Rank by relevance and take top 3
       const rankedResults = universities
@@ -95,8 +87,6 @@ export class UniversityService {
         .sort((a, b) => b.score - a.score) // Highest score first
         .slice(0, this.MAX_RESULTS) // Top 3 only
         .map(item => item.university)
-
-      console.log('Final ranked results:', rankedResults)
 
       // Cache the results - O(1)
       this.searchCache.set(cacheKey, {

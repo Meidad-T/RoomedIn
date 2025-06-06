@@ -19,8 +19,7 @@ const UniversitySearch = ({ onUniversitySelect }) => {
     openDropdown
   } = useUniversitySearch()
 
-  // Debug logging
-  console.log('UniversitySearch render:', { searchText, results, isLoading, isOpen })
+
 
   const containerRef = useRef(null)
 
