@@ -1,0 +1,103 @@
+.mission {
+  padding: 4rem 0;
+  background: white;
+  position: relative;
+}
+
+.mission-content {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.mission-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.mission-arrow {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+  color: var(--primary-green);
+  animation: bounce 2s infinite;
+}
+
+.mission-description {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.mission-description p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.mission-description p:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.mission-description p:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+/* Animations */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mission {
+    padding: 3rem 0;
+  }
+  
+  .mission-title {
+    font-size: 2rem;
+  }
+  
+  .mission-description {
+    text-align: center;
+  }
+  
+  .mission-description p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mission {
+    padding: 2rem 0;
+  }
+  
+  .mission-title {
+    font-size: 1.75rem;
+  }
+}
