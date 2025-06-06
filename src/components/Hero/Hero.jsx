@@ -1,13 +1,10 @@
-import { useState } from 'react'
+import UniversitySearch from '../UniversitySearch/UniversitySearch'
 import './Hero.css'
 
 const Hero = () => {
-  const [searchValue, setSearchValue] = useState('')
-
-  const handleSearch = (e) => {
-    e.preventDefault()
-    // TODO: Implement search functionality
-    console.log('Searching for:', searchValue)
+  const handleUniversitySelect = (university) => {
+    console.log('Selected university:', university)
+    // TODO: Navigate to university page or handle selection
   }
 
   return (
@@ -23,31 +20,7 @@ const Hero = () => {
             </h1>
             
             <div className="search-container">
-              <form onSubmit={handleSearch} className="search-form">
-                <div className="search-input-wrapper">
-                  <svg 
-                    className="search-icon" 
-                    width="20" 
-                    height="20" 
-                    viewBox="0 0 20 20" 
-                    fill="none" 
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle cx="9" cy="9" r="6" stroke="currentColor" strokeWidth="1.5"/>
-                    <path d="m15 15 3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                  </svg>
-                  <input
-                    type="text"
-                    placeholder="Find Your University..."
-                    value={searchValue}
-                    onChange={(e) => setSearchValue(e.target.value)}
-                    className="search-input"
-                  />
-                </div>
-                <button type="submit" className="search-button">
-                  Search
-                </button>
-              </form>
+              <UniversitySearch onUniversitySelect={handleUniversitySelect} />
             </div>
           </div>
         </div>
