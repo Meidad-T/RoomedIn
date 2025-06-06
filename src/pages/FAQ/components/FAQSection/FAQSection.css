@@ -115,36 +115,9 @@
   margin: 0;
 }
 
-/* Floating Monkey Mascot */
-.section-mascot {
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
-  z-index: 10;
-  animation: floatMascot 3s ease-in-out infinite;
-}
 
-.floating-monkey {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-}
-
-.monkey-fallback {
-  font-size: 4rem;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-}
 
 /* Animations */
-@keyframes floatMascot {
-  0%, 100% {
-    transform: translateY(0px) rotate(-5deg);
-  }
-  50% {
-    transform: translateY(-10px) rotate(5deg);
-  }
-}
 
 /* Background colors for sections */
 .faq-feature-section:nth-child(odd) {
@@ -192,16 +165,6 @@
   .faq-image-wrapper {
     max-width: 400px;
   }
-
-  .section-mascot {
-    top: 1rem;
-    right: 1rem;
-  }
-
-  .floating-monkey {
-    width: 60px;
-    height: 60px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -225,9 +188,5 @@
 
   .faq-image-wrapper {
     max-width: 300px;
-  }
-
-  .section-mascot {
-    display: none; /* Hide on very small screens */
   }
 }

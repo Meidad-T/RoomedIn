@@ -97,20 +97,7 @@ const FAQSection = () => {
             </div>
           </div>
 
-          {/* Floating monkey mascot for this section */}
-          <div className="section-mascot">
-            <img
-              src="/src/pages/FAQ/assets/images/monkey_mascot.png"
-              alt="RoomedIn Monkey Mascot"
-              className="floating-monkey"
-              onError={(e) => {
-                // Fallback to emoji if image not found
-                e.target.style.display = 'none'
-                e.target.nextElementSibling.style.display = 'block'
-              }}
-            />
-            <div className="monkey-fallback" style={{ display: 'none' }}>🐵</div>
-          </div>
+
         </div>
       ))}
     </section>

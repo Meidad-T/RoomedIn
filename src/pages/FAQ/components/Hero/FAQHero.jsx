@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import MonkeyMascot from '../Mascot/MonkeyMascot'
 import './FAQHero.css'
 
 const FAQHero = () => {
@@ -41,12 +40,7 @@ const FAQHero = () => {
         </div>
       </div>
 
-      {/* Monkey mascot */}
-      <MonkeyMascot 
-        expression="excited" 
-        position="right" 
-        isVisible={isVisible}
-      />
+
     </section>
   )
 }
