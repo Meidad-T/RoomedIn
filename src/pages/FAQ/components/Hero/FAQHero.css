@@ -1,0 +1,219 @@
+.faq-hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  overflow: hidden;
+  padding-top: 80px; /* Account for fixed header */
+}
+
+.faq-hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+/* Animated background blobs */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+  animation: blobFloat 8s ease-in-out infinite;
+}
+
+.blob-1 {
+  width: 300px;
+  height: 300px;
+  background: var(--primary-green);
+  top: 10%;
+  left: -10%;
+  animation-delay: 0s;
+}
+
+.blob-2 {
+  width: 200px;
+  height: 200px;
+  background: var(--primary-green);
+  top: 60%;
+  right: -5%;
+  animation-delay: 2s;
+}
+
+.blob-3 {
+  width: 150px;
+  height: 150px;
+  background: var(--primary-green);
+  bottom: 20%;
+  left: 20%;
+  animation-delay: 4s;
+}
+
+@keyframes blobFloat {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  33% {
+    transform: translateY(-30px) scale(1.1);
+  }
+  66% {
+    transform: translateY(20px) scale(0.9);
+  }
+}
+
+.faq-hero-overlay {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.faq-hero-content {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.faq-hero-text {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-hero-text.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.faq-hero-title {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.faq-hero-welcome {
+  color: var(--text-dark);
+  animation: slideInLeft 1s ease-out 0.3s both;
+}
+
+.faq-hero-brand {
+  background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: slideInRight 1s ease-out 0.6s both;
+  position: relative;
+}
+
+.faq-hero-brand::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-green), var(--primary-green-dark));
+  border-radius: 2px;
+  animation: expandLine 1s ease-out 1s both;
+}
+
+.faq-hero-subtitle {
+  font-size: clamp(1.1rem, 3vw, 1.3rem);
+  color: var(--text-light);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+  animation: fadeInUp 1s ease-out 0.9s both;
+}
+
+/* Animations */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes expandLine {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100px;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .faq-hero {
+    min-height: 80vh;
+    padding-top: 60px;
+  }
+  
+  .faq-hero-content {
+    padding: 1rem;
+  }
+  
+  .faq-hero-title {
+    margin-bottom: 1rem;
+  }
+  
+  .blob-1 {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .blob-2 {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .blob-3 {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-hero {
+    min-height: 70vh;
+  }
+  
+  .faq-hero-brand::after {
+    width: 60px;
+  }
+}

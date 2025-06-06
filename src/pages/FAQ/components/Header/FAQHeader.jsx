@@ -1,18 +1,22 @@
-import { Link } from 'react-router-dom'
-import './Header.css'
+import './FAQHeader.css'
 
-const Header = () => {
+const FAQHeader = () => {
+  const handleHomeClick = () => {
+    // Navigate back to home page
+    window.location.href = '/'
+  }
+
   return (
-    <header className="header">
+    <header className="faq-header">
       <div className="container">
-        <div className="header-content">
+        <div className="faq-header-content">
           {/* Logo */}
-          <div className="logo">
-            <div className="logo-icon">
+          <div className="faq-logo" onClick={handleHomeClick}>
+            <div className="faq-logo-icon">
               <img
                 src="/src/assets/images/Nav_bar_logo.png"
                 alt="RoomedIn Logo"
-                className="logo-image"
+                className="faq-logo-image"
                 onError={(e) => {
                   // Fallback to SVG if image not found
                   e.target.style.display = 'none';
@@ -26,7 +30,7 @@ const Header = () => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 style={{ display: 'none' }}
-                className="logo-fallback"
+                className="faq-logo-fallback"
               >
                 <circle cx="20" cy="20" r="18" fill="var(--primary-green)" stroke="var(--primary-green-dark)" strokeWidth="2"/>
                 <path d="M12 16h16v12H12V16z" fill="white" stroke="var(--primary-green-dark)" strokeWidth="1.5"/>
@@ -39,18 +43,17 @@ const Header = () => {
           </div>
 
           {/* Navigation */}
-          <nav className="nav">
-            <Link to="/faq" className="nav-link">
-              <div className="nav-icon">
+          <nav className="faq-nav">
+            <button onClick={handleHomeClick} className="faq-nav-link">
+              <div className="faq-nav-icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1.5"/>
-                  <path d="M10 14v-4M10 6h.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                  <path d="M3 10l7-7 7 7M5 8v8a1 1 0 001 1h2a1 1 0 001-1v-3a1 1 0 011-1h2a1 1 0 011 1v3a1 1 0 001 1h2a1 1 0 001-1V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              FAQ
-            </Link>
-            <a href="#signin" className="nav-link">
-              <div className="nav-icon">
+              Home
+            </button>
+            <a href="#signin" className="faq-nav-link">
+              <div className="faq-nav-icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="10" cy="7" r="3" stroke="currentColor" strokeWidth="1.5"/>
                   <path d="M4 18c0-4 2.5-6 6-6s6 2 6 6" stroke="currentColor" strokeWidth="1.5"/>
@@ -65,4 +68,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default FAQHeader

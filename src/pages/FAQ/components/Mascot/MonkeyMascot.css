@@ -1,0 +1,176 @@
+.monkey-mascot {
+  position: fixed;
+  z-index: 500;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.monkey-mascot.right {
+  right: 2rem;
+}
+
+.monkey-mascot.left {
+  left: 2rem;
+}
+
+.monkey-mascot.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.monkey-mascot.hidden {
+  opacity: 0;
+  transform: translateY(20px) scale(0.8);
+}
+
+.monkey-container {
+  position: relative;
+  animation: float 3s ease-in-out infinite;
+}
+
+.monkey-svg {
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+  transition: transform 0.3s ease;
+}
+
+.monkey-mascot:hover .monkey-svg {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Expression-based animations */
+.expression-excited .monkey-container {
+  animation: bounce 0.6s ease-in-out infinite;
+}
+
+.expression-thinking .monkey-container {
+  animation: sway 2s ease-in-out infinite;
+}
+
+.expression-curious .monkey-container {
+  animation: tilt 1.5s ease-in-out infinite;
+}
+
+/* Keyframe animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-15px) scale(1.05);
+  }
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-3deg);
+  }
+  75% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes tilt {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(8deg);
+  }
+}
+
+/* Teleport effect */
+.monkey-mascot.teleporting {
+  animation: teleport 1s ease-in-out;
+}
+
+@keyframes teleport {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    opacity: 0.7;
+    transform: scale(1.2) rotate(180deg);
+    filter: blur(2px);
+  }
+  50% {
+    opacity: 0;
+    transform: scale(0.5) rotate(360deg);
+    filter: blur(4px);
+  }
+  75% {
+    opacity: 0.7;
+    transform: scale(1.2) rotate(540deg);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(720deg);
+    filter: blur(0px);
+  }
+}
+
+/* Portal effect */
+.portal {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, 
+    rgba(46, 204, 113, 0.8) 0%, 
+    rgba(46, 204, 113, 0.4) 30%, 
+    rgba(46, 204, 113, 0.1) 60%, 
+    transparent 100%);
+  animation: portalSpin 2s linear infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+@keyframes portalSpin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.8);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(180deg) scale(1.1);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg) scale(0.8);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .monkey-mascot {
+    right: 1rem;
+  }
+  
+  .monkey-svg {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .monkey-mascot {
+    right: 0.5rem;
+  }
+  
+  .monkey-svg {
+    width: 60px;
+    height: 60px;
+  }
+}

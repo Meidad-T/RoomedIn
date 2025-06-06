@@ -1,0 +1,127 @@
+.faq-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1rem 0;
+}
+
+.faq-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo Styles */
+.faq-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.faq-logo:hover {
+  transform: scale(1.05);
+}
+
+.faq-logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.faq-logo-image {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.faq-logo-fallback {
+  display: none;
+}
+
+.faq-logo-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  letter-spacing: -0.02em;
+}
+
+/* Navigation Styles */
+.faq-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.faq-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 50px;
+  color: var(--text-dark);
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  background: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.faq-nav-link:hover {
+  background-color: var(--primary-green);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+}
+
+.faq-nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .faq-header {
+    padding: 0.75rem 0;
+  }
+  
+  .faq-nav {
+    gap: 1rem;
+  }
+  
+  .faq-nav-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+  
+  .faq-logo-text {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-nav-link span {
+    display: none;
+  }
+  
+  .faq-nav-link {
+    padding: 0.5rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+  }
+}
