@@ -2,15 +2,15 @@
 import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
 
-// Your Firebase configuration
+// Firebase configuration using environment variables
 const firebaseConfig = {
-  apiKey: "AIzaSyA-ZQQvLNm2z0OuDuqDu04zIALyaQfszP4",
-  authDomain: "roomedin.firebaseapp.com",
-  projectId: "roomedin",
-  storageBucket: "roomedin.firebasestorage.app",
-  messagingSenderId: "550790932142",
-  appId: "1:550790932142:web:a83a5814e39245543e6f3f",
-  measurementId: "G-VW8J7PR0NC"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 }
 
 // Initialize Firebase
