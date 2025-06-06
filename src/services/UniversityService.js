@@ -37,7 +37,7 @@ export class UniversityService {
   }
 
   /**
-   * Search universities with optimal performance
+   * Search universities with intelligent multi-word matching
    * Time Complexity: O(log n) for new searches, O(1) for cached
    * Memory Complexity: O(1) with bounded cache
    */
@@ -61,28 +61,48 @@ export class UniversityService {
     }
 
     try {
-      // Firestore query with index - O(log n)
+      // Split search into individual words and clean them
+      const searchWords = searchQuery
+        .split(/\s+/)
+        .map(word => word.trim())
+        .filter(word => word.length >= 2)
+
+      if (searchWords.length === 0) {
+        return []
+      }
+
+      // For single word searches, use the original faster method
+      if (searchWords.length === 1) {
+        return this.searchSingleWord(searchWords[0], searchText)
+      }
+
       const universitiesRef = collection(db, this.COLLECTION_NAME)
+      let allUniversities = new Map() // Use Map to avoid duplicates
 
-      const q = query(
-        universitiesRef,
-        where('searchTerms', 'array-contains', searchQuery),
-        orderBy('name'),
-        limit(10) // Get a few extra for ranking
-      )
+      // Search for each word individually
+      for (const word of searchWords) {
+        const q = query(
+          universitiesRef,
+          where('searchTerms', 'array-contains', word),
+          limit(20) // Get more results for multi-word filtering
+        )
 
-      const querySnapshot = await getDocs(q)
+        const querySnapshot = await getDocs(q)
 
-      // Convert to University objects
-      const universities = querySnapshot.docs.map(doc =>
-        University.fromFirestore(doc)
-      )
+        querySnapshot.docs.forEach(doc => {
+          const university = University.fromFirestore(doc)
+          allUniversities.set(university.id, university)
+        })
+      }
 
-      // Rank by relevance and take top 3
+      // Convert to array and calculate relevance scores
+      const universities = Array.from(allUniversities.values())
+
+      // Enhanced scoring for multi-word searches
       const rankedResults = universities
         .map(uni => ({
           university: uni,
-          score: uni.getRelevanceScore(searchText)
+          score: this.calculateMultiWordScore(uni, searchWords, searchText)
         }))
         .sort((a, b) => b.score - a.score) // Highest score first
         .slice(0, this.MAX_RESULTS) // Top 3 only
@@ -98,6 +118,99 @@ export class UniversityService {
 
     } catch (error) {
       console.error('Error searching universities:', error)
+      return []
+    }
+  }
+
+  /**
+   * Calculate relevance score for multi-word searches
+   * Prioritizes universities that match more search words
+   */
+  static calculateMultiWordScore(university, searchWords, originalSearchText) {
+    let score = 0
+    const uniName = university.name.toLowerCase()
+    const searchTerms = university.searchTerms || []
+
+    // Count how many search words match
+    let matchedWords = 0
+
+    for (const word of searchWords) {
+      let wordMatched = false
+
+      // Exact match in search terms gets highest points
+      if (searchTerms.includes(word)) {
+        score += 100
+        wordMatched = true
+      }
+
+      // Partial match in search terms
+      else if (searchTerms.some(term => term.includes(word))) {
+        score += 50
+        wordMatched = true
+      }
+
+      // Match in university name
+      else if (uniName.includes(word)) {
+        score += 30
+        wordMatched = true
+      }
+
+      if (wordMatched) {
+        matchedWords++
+      }
+    }
+
+    // Bonus for matching more words (prioritize universities that match multiple terms)
+    const matchRatio = matchedWords / searchWords.length
+    score += matchRatio * 200
+
+    // Extra bonus for exact name matches
+    if (uniName === originalSearchText.toLowerCase()) {
+      score += 1000
+    }
+
+    // Bonus for name starting with search text
+    if (uniName.startsWith(originalSearchText.toLowerCase())) {
+      score += 300
+    }
+
+    return score
+  }
+
+  /**
+   * Optimized search for single words (faster than multi-word search)
+   */
+  static async searchSingleWord(word, originalSearchText) {
+    try {
+      const universitiesRef = collection(db, this.COLLECTION_NAME)
+
+      const q = query(
+        universitiesRef,
+        where('searchTerms', 'array-contains', word),
+        orderBy('name'),
+        limit(10)
+      )
+
+      const querySnapshot = await getDocs(q)
+
+      const universities = querySnapshot.docs.map(doc =>
+        University.fromFirestore(doc)
+      )
+
+      // Use original scoring for single words
+      const rankedResults = universities
+        .map(uni => ({
+          university: uni,
+          score: uni.getRelevanceScore(originalSearchText)
+        }))
+        .sort((a, b) => b.score - a.score)
+        .slice(0, this.MAX_RESULTS)
+        .map(item => item.university)
+
+      return rankedResults
+
+    } catch (error) {
+      console.error('Error in single word search:', error)
       return []
     }
   }

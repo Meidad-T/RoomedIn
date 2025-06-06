@@ -56,39 +56,41 @@ export class University {
    * Calculate search relevance score for ranking
    * Higher score = better match
    * Time Complexity: O(k) where k is number of search terms
+   * Note: This method is now primarily used as a fallback
+   * Main scoring is handled by UniversityService.calculateMultiWordScore
    */
   getRelevanceScore(searchText) {
     if (!searchText) return 0
-    
+
     const query = searchText.toLowerCase().trim()
     let score = 0
-    
+
     // Exact name match gets highest score
     if (this.name.toLowerCase() === query) {
       return 1000
     }
-    
+
     // Name starts with query gets high score
     if (this.name.toLowerCase().startsWith(query)) {
       score += 500
     }
-    
+
     // Name contains query gets medium score
     if (this.name.toLowerCase().includes(query)) {
       score += 100
     }
-    
+
     // Search terms exact match
     if (this.searchTerms.includes(query)) {
       score += 200
     }
-    
+
     // Search terms partial match
-    const partialMatches = this.searchTerms.filter(term => 
+    const partialMatches = this.searchTerms.filter(term =>
       term.startsWith(query) || term.includes(query)
     ).length
     score += partialMatches * 50
-    
+
     return score
   }
 }
