@@ -1,6 +1,7 @@
 // Firebase configuration and initialization
 import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
+import { getAuth, GoogleAuthProvider } from 'firebase/auth'
 
 // Firebase configuration using environment variables
 const firebaseConfig = {
@@ -13,10 +14,14 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 }
 
-// Initialize Firebase .
+// Initialize Firebase
 const app = initializeApp(firebaseConfig)
 
 // Initialize Firestore
 export const db = getFirestore(app)
+
+// Initialize Authentication
+export const auth = getAuth(app)
+export const googleProvider = new GoogleAuthProvider()
 
 export default app

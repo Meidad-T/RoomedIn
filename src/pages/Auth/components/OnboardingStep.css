@@ -1,0 +1,408 @@
+/* Common styles for all step components */
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 2rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.75rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+.form-input.error {
+  border-color: #ef4444;
+}
+
+/* Choice Cards */
+.choice-grid {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.choice-grid.two-column {
+  grid-template-columns: 1fr 1fr;
+}
+
+.choice-grid.three-column {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.choice-grid.four-column {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.choice-card {
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  position: relative;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.choice-card:hover {
+  border-color: #22c55e;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(34, 197, 94, 0.15);
+}
+
+.choice-card.selected {
+  border-color: #22c55e;
+  background: #f0fdf4;
+  box-shadow: 0 8px 25px rgba(34, 197, 94, 0.2);
+}
+
+.choice-card.selected::after {
+  content: '✓';
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 24px;
+  height: 24px;
+  background: #22c55e;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: bold;
+}
+
+.choice-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 0.75rem;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.choice-emoji {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.choice-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0;
+}
+
+.choice-subtitle {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0.25rem 0 0 0;
+}
+
+/* Date Inputs */
+.date-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.date-select {
+  padding: 0.875rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 1rem;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.date-select:focus {
+  outline: none;
+  border-color: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+/* Age Display */
+.age-display {
+  text-align: center;
+  padding: 1rem;
+  background: #f0fdf4;
+  border-radius: 12px;
+  margin-top: 1rem;
+}
+
+.age-text {
+  font-size: 1.1rem;
+  color: #16a34a;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Multi-select */
+.multi-select-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.multi-choice-card {
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.multi-choice-card:hover {
+  border-color: #22c55e;
+  transform: translateY(-1px);
+}
+
+.multi-choice-card.selected {
+  border-color: #22c55e;
+  background: #f0fdf4;
+}
+
+/* Text Areas */
+.form-textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.form-textarea:focus {
+  outline: none;
+  border-color: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+/* Helper Text */
+.helper-text {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.disclaimer {
+  background: #fef3c7;
+  border: 1px solid #f59e0b;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  color: #92400e;
+  margin-top: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .choice-grid.four-column {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .choice-grid.three-column {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .date-group {
+    grid-template-columns: 1fr;
+  }
+  
+  .choice-card {
+    min-height: 100px;
+    padding: 1rem;
+  }
+  
+  .choice-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .choice-emoji {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .choice-grid.two-column {
+    grid-template-columns: 1fr;
+  }
+  
+  .multi-select-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* University Search Styles */
+.loading-container {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.university-results {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  margin-top: 1rem;
+}
+
+.university-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.university-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #f3f4f6;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.university-card:last-child {
+  border-bottom: none;
+}
+
+.university-card:hover {
+  background: #f9fafb;
+}
+
+.university-card.selected {
+  background: #f0fdf4;
+  border-color: #22c55e;
+}
+
+.university-info {
+  flex: 1;
+  text-align: left;
+}
+
+.university-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 0.25rem 0;
+}
+
+.university-location {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.university-icon {
+  font-size: 1.5rem;
+  margin-left: 1rem;
+}
+
+.no-results {
+  padding: 2rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+.search-hint {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #6b7280;
+}
+
+.hint-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Custom Input Groups */
+.custom-input-group {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.custom-input-group .form-input {
+  flex: 1;
+}
+
+.add-custom-btn {
+  padding: 1rem 1.5rem;
+  background: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-custom-btn:hover:not(:disabled) {
+  background: #16a34a;
+}
+
+.add-custom-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.custom-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f0fdf4;
+  border: 1px solid #22c55e;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  margin: 0.25rem;
+  font-size: 0.9rem;
+  color: #16a34a;
+}
+
+.custom-tag button {
+  background: none;
+  border: none;
+  color: #16a34a;
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  margin-left: 0.25rem;
+}
+
+.custom-tag button:hover {
+  color: #dc2626;
+}
