@@ -49,7 +49,7 @@ const Header = () => {
               </div>
               FAQ
             </Link>
-            <a href="#signin" className="nav-link">
+            <Link to="/signin" className="nav-link">
               <div className="nav-icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="10" cy="7" r="3" stroke="currentColor" strokeWidth="1.5"/>
@@ -57,7 +57,7 @@ const Header = () => {
                 </svg>
               </div>
               Sign in
-            </a>
+            </Link>
           </nav>
         </div>
       </div>

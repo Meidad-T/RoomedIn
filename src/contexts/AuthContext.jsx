@@ -108,15 +108,22 @@ export const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         setUser(user)
-        
+
         // Get user profile from Firestore
         try {
           const userDoc = await getDoc(doc(db, 'users', user.uid))
           if (userDoc.exists()) {
-            setUserProfile(userDoc.data())
+            const profileData = userDoc.data()
+            setUserProfile(profileData)
+            // Check if profile is complete to determine if user is new
+            setIsNewUser(!profileData.profileComplete)
+          } else {
+            // User document doesn't exist, they are definitely new
+            setIsNewUser(true)
           }
         } catch (error) {
           console.error('Error fetching user profile:', error)
+          setIsNewUser(true) // Assume new user on error
         }
       } else {
         setUser(null)
