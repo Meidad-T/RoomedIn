@@ -20,7 +20,7 @@ const OnboardingPage = () => {
     }
   }, [user, navigate])
 
-  // Quiz steps configuration
+  // Quiz steps configuration - One question per page
   const steps = [
     {
       id: 'university',
@@ -29,32 +29,98 @@ const OnboardingPage = () => {
       required: true
     },
     {
-      id: 'personal',
-      title: 'Tell us about yourself',
-      type: 'personal-info',
+      id: 'firstName',
+      title: "What's your first name?",
+      type: 'first-name',
       required: true
     },
     {
-      id: 'identity',
-      title: 'Identity & Preferences',
-      type: 'identity',
+      id: 'lastName',
+      title: "What's your last name?",
+      type: 'last-name',
       required: true
     },
     {
-      id: 'lifestyle',
-      title: 'Lifestyle Preferences',
-      type: 'lifestyle',
+      id: 'birthday',
+      title: "When's your birthday?",
+      type: 'birthday',
       required: true
     },
     {
-      id: 'living',
-      title: 'Living Preferences',
-      type: 'living-preferences',
+      id: 'major',
+      title: "What's your major?",
+      type: 'major',
+      required: true
+    },
+    {
+      id: 'graduationYear',
+      title: 'What year do you graduate?',
+      type: 'graduation-year',
+      required: true
+    },
+    {
+      id: 'gender',
+      title: 'Gender assigned at birth',
+      type: 'gender',
+      required: true
+    },
+    {
+      id: 'sexuality',
+      title: 'Sexual orientation',
+      type: 'sexuality',
+      required: true
+    },
+    {
+      id: 'religion',
+      title: 'Religion/Beliefs',
+      type: 'religion',
+      required: true
+    },
+    {
+      id: 'smoking',
+      title: 'Do you smoke or vape?',
+      type: 'smoking',
+      required: true
+    },
+    {
+      id: 'drinking',
+      title: 'Do you drink alcohol?',
+      type: 'drinking',
+      required: true
+    },
+    {
+      id: 'pets',
+      title: 'Do you have pets?',
+      type: 'pets',
+      required: true
+    },
+    {
+      id: 'cleanliness',
+      title: 'How clean are you?',
+      type: 'cleanliness',
+      required: true
+    },
+    {
+      id: 'studyHabits',
+      title: 'What are your study habits?',
+      type: 'study-habits',
+      required: true
+    },
+    {
+      id: 'socialLevel',
+      title: 'How social are you?',
+      type: 'social-level',
+      required: true
+    },
+    {
+      id: 'sleepSchedule',
+      title: 'What time do you usually sleep?',
+      type: 'sleep-schedule',
       required: true
     },
     {
       id: 'interests',
-      title: 'Interests & Hobbies',
+      title: 'What are your interests?',
       type: 'interests',
       required: false
     }
@@ -193,32 +259,33 @@ const OnboardingPage = () => {
 
   return (
     <div className="onboarding-page">
-      <div className="onboarding-container">
-        {/* Progress bar */}
-        <div className="progress-bar">
-          <div className="progress-track">
-            <div 
-              className="progress-fill"
-              style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
-            />
-          </div>
-          <span className="progress-text">
-            Step {currentStep + 1} of {steps.length}
-          </span>
+      {/* Progress bar */}
+      <div className="progress-bar">
+        <div className="progress-track">
+          <div
+            className="progress-fill"
+            style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
+          />
         </div>
-
-        {/* Current step */}
-        <OnboardingStep
-          step={steps[currentStep]}
-          formData={formData}
-          onComplete={handleStepComplete}
-          onNext={handleNext}
-          onBack={handleBack}
-          canGoBack={currentStep > 0}
-          isLastStep={currentStep === steps.length - 1}
-          loading={loading}
-        />
+        <span className="progress-text">
+          Step {currentStep + 1} of {steps.length} •
+          <span className="progress-percentage">
+            {Math.round(((currentStep + 1) / steps.length) * 100)}%
+          </span>
+        </span>
       </div>
+
+      {/* Current step */}
+      <OnboardingStep
+        step={steps[currentStep]}
+        formData={formData}
+        onComplete={handleStepComplete}
+        onNext={handleNext}
+        onBack={handleBack}
+        canGoBack={currentStep > 0}
+        isLastStep={currentStep === steps.length - 1}
+        loading={loading}
+      />
 
       {/* Success modal */}
       {showSuccess && (

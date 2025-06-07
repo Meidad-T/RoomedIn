@@ -1,9 +1,20 @@
 import { useState, useEffect } from 'react'
 import UniversityStep from './steps/UniversityStep'
-import PersonalInfoStep from './steps/PersonalInfoStep'
-import IdentityStep from './steps/IdentityStep'
-import LifestyleStep from './steps/LifestyleStep'
-import LivingPreferencesStep from './steps/LivingPreferencesStep'
+import FirstNameStep from './steps/FirstNameStep'
+import LastNameStep from './steps/LastNameStep'
+import BirthdayStep from './steps/BirthdayStep'
+import MajorStep from './steps/MajorStep'
+import GraduationYearStep from './steps/GraduationYearStep'
+import GenderStep from './steps/GenderStep'
+import SexualityStep from './steps/SexualityStep'
+import ReligionStep from './steps/ReligionStep'
+import SmokingStep from './steps/SmokingStep'
+import DrinkingStep from './steps/DrinkingStep'
+import PetsStep from './steps/PetsStep'
+import CleanlinessStep from './steps/CleanlinessStep'
+import StudyHabitsStep from './steps/StudyHabitsStep'
+import SocialLevelStep from './steps/SocialLevelStep'
+import SleepScheduleStep from './steps/SleepScheduleStep'
 import InterestsStep from './steps/InterestsStep'
 import './OnboardingStep.css'
 
@@ -47,24 +58,57 @@ const OnboardingStep = ({
     switch (step.type) {
       case 'university-search':
         return <UniversityStep {...commonProps} />
-      
-      case 'personal-info':
-        return <PersonalInfoStep {...commonProps} />
-      
-      case 'identity':
-        return <IdentityStep {...commonProps} />
-      
-      case 'lifestyle':
-        return <LifestyleStep {...commonProps} />
-      
-      case 'living-preferences':
-        return <LivingPreferencesStep {...commonProps} />
-      
+
+      case 'first-name':
+        return <FirstNameStep {...commonProps} />
+
+      case 'last-name':
+        return <LastNameStep {...commonProps} />
+
+      case 'birthday':
+        return <BirthdayStep {...commonProps} />
+
+      case 'major':
+        return <MajorStep {...commonProps} />
+
+      case 'graduation-year':
+        return <GraduationYearStep {...commonProps} />
+
+      case 'gender':
+        return <GenderStep {...commonProps} />
+
+      case 'sexuality':
+        return <SexualityStep {...commonProps} />
+
+      case 'religion':
+        return <ReligionStep {...commonProps} />
+
+      case 'smoking':
+        return <SmokingStep {...commonProps} />
+
+      case 'drinking':
+        return <DrinkingStep {...commonProps} />
+
+      case 'pets':
+        return <PetsStep {...commonProps} />
+
+      case 'cleanliness':
+        return <CleanlinessStep {...commonProps} />
+
+      case 'study-habits':
+        return <StudyHabitsStep {...commonProps} />
+
+      case 'social-level':
+        return <SocialLevelStep {...commonProps} />
+
+      case 'sleep-schedule':
+        return <SleepScheduleStep {...commonProps} />
+
       case 'interests':
         return <InterestsStep {...commonProps} />
-      
+
       default:
-        return <div>Unknown step type</div>
+        return <div>Unknown step type: {step.type}</div>
     }
   }
 

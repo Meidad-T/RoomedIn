@@ -30,13 +30,13 @@ export const AuthProvider = ({ children }) => {
     try {
       // Set persistence to local storage
       await setPersistence(auth, browserLocalPersistence)
-      
+
       const result = await signInWithPopup(auth, googleProvider)
       const user = result.user
-      
+
       // Check if user exists in Firestore
       const userDoc = await getDoc(doc(db, 'users', user.uid))
-      
+
       if (!userDoc.exists()) {
         // New user - create basic profile
         const basicProfile = {
@@ -47,17 +47,21 @@ export const AuthProvider = ({ children }) => {
           createdAt: new Date(),
           profileComplete: false
         }
-        
+
         await setDoc(doc(db, 'users', user.uid), basicProfile)
         setUserProfile(basicProfile)
         setIsNewUser(true)
+
+        // Return early to prevent onAuthStateChanged from overriding
+        return { user, isNewUser: true }
       } else {
         // Existing user
-        setUserProfile(userDoc.data())
-        setIsNewUser(false)
+        const profileData = userDoc.data()
+        setUserProfile(profileData)
+        setIsNewUser(!profileData.profileComplete)
+
+        return { user, isNewUser: !profileData.profileComplete }
       }
-      
-      return result
     } catch (error) {
       console.error('Error signing in with Google:', error)
       throw error

@@ -28,10 +28,15 @@ const SignInPage = () => {
     try {
       setLoading(true)
       setError('')
-      
-      await signInWithGoogle()
-      
-      // Navigation will be handled by useEffect above
+
+      const result = await signInWithGoogle()
+
+      // Handle immediate redirect based on user status
+      if (result.isNewUser) {
+        navigate('/onboarding')
+      } else {
+        navigate(from, { replace: true })
+      }
     } catch (error) {
       console.error('Sign in error:', error)
       setError('Failed to sign in. Please try again.')

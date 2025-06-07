@@ -33,6 +33,43 @@
   border-color: #ef4444;
 }
 
+/* Large Input Fields for Single Questions */
+.large-input {
+  font-size: 1.5rem;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 16px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.large-date-group {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.large-date-group .form-input {
+  font-size: 1.2rem;
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.age-display {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #22c55e;
+  font-weight: 600;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f0fdf4;
+  border-radius: 12px;
+  max-width: 300px;
+  margin: 1rem auto 0 auto;
+}
+
 /* Choice Cards */
 .choice-grid {
   display: grid;
@@ -126,6 +163,43 @@
   font-size: 0.875rem;
   color: #6b7280;
   margin: 0.25rem 0 0 0;
+}
+
+/* Large Choice Cards for Single Questions */
+.large-cards {
+  max-width: 600px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.large-choice-card {
+  min-height: 200px;
+  padding: 3rem 2rem;
+}
+
+.large-choice-icon {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 1.5rem;
+}
+
+.large-choice-emoji {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.large-choice-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* Single Question Step Container */
+.single-question-step {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Date Inputs */
