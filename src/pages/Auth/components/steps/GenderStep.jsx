@@ -7,13 +7,13 @@ const GenderStep = ({ data, onChange, onValidationChange }) => {
     {
       id: 'male',
       title: 'Male',
-      image: '/images/monkeys/male_monkey.png',
+      image: '/images/male_monkey.png',
       emoji: '👨'
     },
     {
       id: 'female',
       title: 'Female',
-      image: '/images/monkeys/female_monkey.png',
+      image: '/images/female_monkey.png',
       emoji: '👩'
     }
   ]

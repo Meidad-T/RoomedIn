@@ -121,7 +121,13 @@ const OnboardingPage = () => {
     {
       id: 'interests',
       title: 'What are your interests?',
-      type: 'interests',
+      type: 'interests-only',
+      required: false
+    },
+    {
+      id: 'hobbies',
+      title: 'What are your hobbies?',
+      type: 'hobbies',
       required: false
     }
   ]

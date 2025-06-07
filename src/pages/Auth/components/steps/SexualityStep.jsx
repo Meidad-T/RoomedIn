@@ -10,7 +10,6 @@ const SexualityStep = ({ data, onChange, onValidationChange }) => {
     { id: 'lesbian', title: 'Lesbian', emoji: '🌈' },
     { id: 'bisexual', title: 'Bisexual', emoji: '💜' },
     { id: 'pansexual', title: 'Pansexual', emoji: '💖' },
-    { id: 'asexual', title: 'Asexual', emoji: '🖤' },
     { id: 'other', title: 'Other', emoji: '✨' }
   ]
 
@@ -29,8 +28,20 @@ const SexualityStep = ({ data, onChange, onValidationChange }) => {
   return (
     <div className="single-question-step">
       <div className="form-group">
-        <div className="choice-grid three-column large-cards">
-          {sexualityOptions.map((option) => (
+        <div className="sexuality-grid large-cards">
+          {sexualityOptions.slice(0, 3).map((option) => (
+            <div
+              key={option.id}
+              className={`choice-card large-choice-card ${sexuality === option.id ? 'selected' : ''}`}
+              onClick={() => setSexuality(option.id)}
+            >
+              <div className="choice-emoji large-choice-emoji">{option.emoji}</div>
+              <h3 className="choice-title large-choice-title">{option.title}</h3>
+            </div>
+          ))}
+        </div>
+        <div className="sexuality-grid-bottom large-cards">
+          {sexualityOptions.slice(3).map((option) => (
             <div
               key={option.id}
               className={`choice-card large-choice-card ${sexuality === option.id ? 'selected' : ''}`}

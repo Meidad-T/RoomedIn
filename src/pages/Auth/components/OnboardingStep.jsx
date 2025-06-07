@@ -15,7 +15,8 @@ import CleanlinessStep from './steps/CleanlinessStep'
 import StudyHabitsStep from './steps/StudyHabitsStep'
 import SocialLevelStep from './steps/SocialLevelStep'
 import SleepScheduleStep from './steps/SleepScheduleStep'
-import InterestsStep from './steps/InterestsStep'
+import InterestsOnlyStep from './steps/InterestsOnlyStep'
+import HobbiesStep from './steps/HobbiesStep'
 import './OnboardingStep.css'
 
 const OnboardingStep = ({ 
@@ -104,8 +105,11 @@ const OnboardingStep = ({
       case 'sleep-schedule':
         return <SleepScheduleStep {...commonProps} />
 
-      case 'interests':
-        return <InterestsStep {...commonProps} />
+      case 'interests-only':
+        return <InterestsOnlyStep {...commonProps} />
+
+      case 'hobbies':
+        return <HobbiesStep {...commonProps} />
 
       default:
         return <div>Unknown step type: {step.type}</div>

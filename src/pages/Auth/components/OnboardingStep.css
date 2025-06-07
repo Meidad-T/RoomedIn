@@ -73,20 +73,27 @@
 /* Choice Cards */
 .choice-grid {
   display: grid;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-bottom: 1.5rem;
+  padding: 0 1rem;
 }
 
 .choice-grid.two-column {
   grid-template-columns: 1fr 1fr;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .choice-grid.three-column {
   grid-template-columns: repeat(3, 1fr);
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .choice-grid.four-column {
   grid-template-columns: repeat(4, 1fr);
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .choice-card {
@@ -98,12 +105,14 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
   position: relative;
-  min-height: 140px;
+  min-height: 160px;
+  min-width: 160px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  aspect-ratio: 1.1 / 1;
 }
 
 .choice-card:hover {
@@ -167,30 +176,93 @@
 
 /* Large Choice Cards for Single Questions */
 .large-cards {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .large-choice-card {
-  min-height: 200px;
-  padding: 3rem 2rem;
+  min-height: 180px;
+  padding: 2.5rem 2rem;
+  aspect-ratio: 1.3 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .large-choice-icon {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 1.5rem;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1rem;
 }
 
 .large-choice-emoji {
-  font-size: 4rem;
-  margin-bottom: 1.5rem;
+  font-size: 3.5rem;
+  margin-bottom: 1.2rem;
 }
 
 .large-choice-title {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* Sexuality Grid Layout */
+.sexuality-grid {
+  display: flex;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+}
+
+.sexuality-grid-bottom {
+  display: flex;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Religion Grid Layout */
+.religion-grid {
+  display: flex;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+}
+
+.religion-grid-bottom {
+  display: flex;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+
+
+/* Custom Input Styling for Single Questions */
+.single-question-step .form-group {
+  width: 100%;
+  max-width: 800px;
+}
+
+.single-question-step .form-input {
+  max-width: 400px;
+  margin: 0 auto;
+  display: block;
 }
 
 /* Single Question Step Container */
@@ -246,7 +318,10 @@
 .multi-select-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .multi-choice-card {
@@ -258,6 +333,11 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .multi-choice-card:hover {
@@ -271,6 +351,13 @@
   background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
   box-shadow: 0 8px 20px rgba(34, 197, 94, 0.15);
   transform: translateY(-1px);
+}
+
+.large-multi-card {
+  min-height: 140px;
+  min-width: 140px;
+  padding: 1.5rem;
+  aspect-ratio: 1.1 / 1;
 }
 
 /* Text Areas */
@@ -315,27 +402,73 @@
   .choice-grid.four-column {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .choice-grid.three-column {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
+  .sexuality-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+    max-width: 500px;
+  }
+
+  .sexuality-grid-bottom {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+    max-width: 500px;
+  }
+
+  .religion-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+    max-width: 500px;
+  }
+
+  .religion-grid-bottom {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+    max-width: 500px;
+  }
+
+  .large-choice-card {
+    min-height: 160px;
+    padding: 2rem 1.5rem;
+  }
+
+  .large-choice-emoji {
+    font-size: 3rem;
+  }
+
+  .large-choice-title {
+    font-size: 1.2rem;
+  }
+
   .date-group {
     grid-template-columns: 1fr;
   }
-  
+
   .choice-card {
-    min-height: 100px;
+    min-height: 120px;
     padding: 1rem;
   }
-  
+
+  .large-choice-card {
+    min-height: 140px;
+    padding: 1.5rem 1rem;
+  }
+
   .choice-icon {
     width: 50px;
     height: 50px;
   }
-  
+
   .choice-emoji {
     font-size: 2rem;
+  }
+
+  .large-choice-emoji {
+    font-size: 2.5rem;
   }
 }
 
@@ -343,9 +476,59 @@
   .choice-grid.two-column {
     grid-template-columns: 1fr;
   }
-  
-  .multi-select-grid {
+
+  .sexuality-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 300px;
+  }
+
+  .sexuality-grid-bottom {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 300px;
+  }
+
+  .religion-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 300px;
+  }
+
+  .religion-grid-bottom {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 300px;
+  }
+
+  .large-choice-card {
+    min-height: 140px;
+    padding: 1.5rem 1rem;
+  }
+
+  .large-choice-emoji {
+    font-size: 2.5rem;
+  }
+
+  .large-choice-title {
+    font-size: 1.1rem;
+  }
+
+  .multi-select-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .large-choice-card {
+    min-height: 120px;
+    padding: 1rem;
+  }
+
+  .large-choice-emoji {
+    font-size: 2rem;
+  }
+
+  .large-choice-title {
+    font-size: 1rem;
   }
 }
 
