@@ -100,6 +100,21 @@ const FAQSection = () => {
 
         </div>
       ))}
+
+      {/* Contact section at the bottom */}
+      <div className="faq-contact-section">
+        <div className="container">
+          <div className="faq-contact-content">
+            <p className="faq-contact-text">
+              Got more questions? Please let us know by sending us an email at{' '}
+              <a href="mailto:roomedinhelp@gmail.com" className="faq-contact-email">
+                roomedinhelp@gmail.com
+              </a>{' '}
+              and we will do our best to get back to you!
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
   )
 }

@@ -128,6 +128,38 @@
   background: #f8fafc;
 }
 
+/* Contact Section */
+.faq-contact-section {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  text-align: center;
+}
+
+.faq-contact-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.faq-contact-text {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: white;
+  margin: 0;
+}
+
+.faq-contact-email {
+  color: #fef3c7;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.faq-contact-email:hover {
+  color: #fbbf24;
+  text-decoration: none;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .faq-feature-content {
@@ -188,5 +220,13 @@
 
   .faq-image-wrapper {
     max-width: 300px;
+  }
+
+  .faq-contact-section {
+    padding: 3rem 0;
+  }
+
+  .faq-contact-text {
+    font-size: 1rem;
   }
 }
