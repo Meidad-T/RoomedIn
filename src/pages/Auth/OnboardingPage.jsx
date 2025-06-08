@@ -153,45 +153,75 @@ const OnboardingPage = () => {
     }
   }
 
-  const calculateAge = (birthDate) => {
+  const calculateAge = (birthday) => {
+    if (!birthday) return null
+
     const today = new Date()
-    const birth = new Date(birthDate)
-    let age = today.getFullYear() - birth.getFullYear()
-    const monthDiff = today.getMonth() - birth.getMonth()
-    
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+    const birthDate = new Date(birthday)
+    let age = today.getFullYear() - birthDate.getFullYear()
+    const monthDiff = today.getMonth() - birthDate.getMonth()
+
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
       age--
     }
-    
+
     return age
   }
+
+
 
   const generateSearchIndexes = (data) => {
     // Generate compound indexes for O(1) matching
     const indexes = {}
-    
+
+    // Get actual values (use custom if "other" is selected)
+    const actualSexuality = data.sexuality === 'other' ? data.customSexuality : data.sexuality
+    const actualReligion = data.religion === 'other' ? data.customReligion : data.religion
+    const actualPets = data.pets === 'other' ? data.customPets : data.pets
+
     // Basic combinations
     if (data.gender && data.university) {
       indexes[`${data.gender}_${data.university}`] = true
     }
-    
+
     if (data.gender && data.smoking) {
       indexes[`${data.gender}_${data.smoking}`] = true
     }
-    
+
     if (data.university && data.smoking) {
       indexes[`${data.university}_${data.smoking}`] = true
     }
-    
+
+    if (data.gender && actualSexuality) {
+      indexes[`${data.gender}_${actualSexuality}`] = true
+    }
+
+    if (data.gender && actualReligion) {
+      indexes[`${data.gender}_${actualReligion}`] = true
+    }
+
+    if (data.gender && actualPets) {
+      indexes[`${data.gender}_${actualPets}`] = true
+    }
+
     // Triple combinations
     if (data.gender && data.university && data.smoking) {
       indexes[`${data.gender}_${data.university}_${data.smoking}`] = true
     }
-    
+
     if (data.gender && data.cleanliness && data.studyHabits) {
       indexes[`${data.gender}_${data.cleanliness}_${data.studyHabits}`] = true
     }
-    
+
+    if (data.gender && data.socialLevel && data.sleepSchedule) {
+      indexes[`${data.gender}_${data.socialLevel}_${data.sleepSchedule}`] = true
+    }
+
+    // Lifestyle combinations
+    if (data.smoking && data.drinking && actualPets) {
+      indexes[`${data.smoking}_${data.drinking}_${actualPets}`] = true
+    }
+
     return indexes
   }
 
@@ -201,54 +231,65 @@ const OnboardingPage = () => {
       
       // Calculate age from birthday
       const age = formData.birthday ? calculateAge(formData.birthday) : null
-      
-      // Prepare user profile data
-      const profileData = {
+
+      // Prepare user profile data (filter out undefined values)
+      const rawProfileData = {
         // Personal Information
         firstName: formData.firstName,
         lastName: formData.lastName,
         birthday: formData.birthday,
         age: age,
-        
+
         // University & Academic
         university: formData.university,
         major: formData.major,
         minor: formData.minor,
         graduationYear: formData.graduationYear,
-        
+
         // Identity
         gender: formData.gender,
         sexuality: formData.sexuality,
+        customSexuality: formData.customSexuality || '',
         religion: formData.religion,
-        
+        customReligion: formData.customReligion || '',
+
         // Lifestyle
         smoking: formData.smoking,
         drinking: formData.drinking,
         pets: formData.pets,
+        customPets: formData.customPets || '',
         petType: formData.petType,
-        
+
         // Living Preferences
         cleanliness: formData.cleanliness,
         studyHabits: formData.studyHabits,
         socialLevel: formData.socialLevel,
         sleepSchedule: formData.sleepSchedule,
-        
+
         // Interests
         interests: formData.interests || [],
         hobbies: formData.hobbies || [],
-        
+
         // System fields
         profileComplete: true,
         completedAt: new Date(),
         searchIndexes: generateSearchIndexes(formData)
       }
+
+      // Filter out undefined values to prevent Firebase errors
+      const profileData = Object.fromEntries(
+        Object.entries(rawProfileData).filter(([key, value]) => value !== undefined)
+      )
       
+      console.log('Saving user profile data:', profileData)
       await updateUserProfile(profileData)
+      console.log('Profile saved successfully!')
       setShowSuccess(true)
-      
+
     } catch (error) {
       console.error('Error saving profile:', error)
-      alert('Error saving your profile. Please try again.')
+      console.error('Error details:', error.message)
+      alert(`Error saving your profile: ${error.message}. Please try again.`)
     } finally {
       setLoading(false)
     }
