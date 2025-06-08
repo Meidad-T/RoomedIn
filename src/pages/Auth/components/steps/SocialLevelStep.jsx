@@ -4,10 +4,10 @@ const SocialLevelStep = ({ data, onChange, onValidationChange }) => {
   const [socialLevel, setSocialLevel] = useState(data.socialLevel || '')
 
   const socialOptions = [
-    { id: 'very-social', title: 'Very Social', emoji: '🎉', subtitle: 'Love parties and gatherings' },
-    { id: 'social', title: 'Social', emoji: '😊', subtitle: 'Enjoy hanging out with friends' },
-    { id: 'moderate', title: 'Moderate', emoji: '😌', subtitle: 'Sometimes social, sometimes not' },
-    { id: 'introverted', title: 'Introverted', emoji: '📖', subtitle: 'Prefer quiet time alone' }
+    { id: 'very-social', title: 'Very Social', emoji: '🎉' },
+    { id: 'social', title: 'Social', emoji: '😊' },
+    { id: 'moderate', title: 'Moderate', emoji: '😌' },
+    { id: 'introverted', title: 'Introverted', emoji: '📖' }
   ]
 
   useEffect(() => {
@@ -31,7 +31,9 @@ const SocialLevelStep = ({ data, onChange, onValidationChange }) => {
             >
               <div className="choice-emoji large-choice-emoji">{option.emoji}</div>
               <h3 className="choice-title large-choice-title">{option.title}</h3>
-              <p className="choice-subtitle">{option.subtitle}</p>
+              {option.subtitle && (
+                <p className="choice-subtitle">{option.subtitle}</p>
+              )}
             </div>
           ))}
         </div>

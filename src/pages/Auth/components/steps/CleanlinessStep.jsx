@@ -4,10 +4,10 @@ const CleanlinessStep = ({ data, onChange, onValidationChange }) => {
   const [cleanliness, setCleanliness] = useState(data.cleanliness || '')
 
   const cleanlinessOptions = [
-    { id: 'very-clean', title: 'Very Clean', emoji: '✨', subtitle: 'Everything spotless' },
-    { id: 'clean', title: 'Clean', emoji: '🧹', subtitle: 'Tidy and organized' },
-    { id: 'average', title: 'Average', emoji: '🏠', subtitle: 'Reasonably clean' },
-    { id: 'messy', title: 'A bit messy', emoji: '🤷', subtitle: 'Lived-in look' }
+    { id: 'very-clean', title: 'Very Clean', emoji: '✨' },
+    { id: 'clean', title: 'Clean', emoji: '🧹' },
+    { id: 'average', title: 'Average', emoji: '🏠' },
+    { id: 'messy', title: 'A bit messy', emoji: '🤷' }
   ]
 
   useEffect(() => {
@@ -31,7 +31,9 @@ const CleanlinessStep = ({ data, onChange, onValidationChange }) => {
             >
               <div className="choice-emoji large-choice-emoji">{option.emoji}</div>
               <h3 className="choice-title large-choice-title">{option.title}</h3>
-              <p className="choice-subtitle">{option.subtitle}</p>
+              {option.subtitle && (
+                <p className="choice-subtitle">{option.subtitle}</p>
+              )}
             </div>
           ))}
         </div>

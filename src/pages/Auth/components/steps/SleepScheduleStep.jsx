@@ -4,10 +4,10 @@ const SleepScheduleStep = ({ data, onChange, onValidationChange }) => {
   const [sleepSchedule, setSleepSchedule] = useState(data.sleepSchedule || '')
 
   const sleepOptions = [
-    { id: 'early-bird', title: 'Early Bird', emoji: '🌅', subtitle: 'Sleep by 10 PM, wake up early' },
-    { id: 'normal', title: 'Normal', emoji: '😴', subtitle: 'Sleep around 11 PM - 12 AM' },
-    { id: 'night-owl', title: 'Night Owl', emoji: '🦉', subtitle: 'Sleep after midnight' },
-    { id: 'irregular', title: 'Irregular', emoji: '🔄', subtitle: 'My schedule varies' }
+    { id: 'early-bird', title: 'Early Bird', emoji: '🌅' },
+    { id: 'normal', title: 'Normal', emoji: '😴' },
+    { id: 'night-owl', title: 'Night Owl', emoji: '🦉' },
+    { id: 'irregular', title: 'Irregular', emoji: '🔄' }
   ]
 
   useEffect(() => {
@@ -31,7 +31,9 @@ const SleepScheduleStep = ({ data, onChange, onValidationChange }) => {
             >
               <div className="choice-emoji large-choice-emoji">{option.emoji}</div>
               <h3 className="choice-title large-choice-title">{option.title}</h3>
-              <p className="choice-subtitle">{option.subtitle}</p>
+              {option.subtitle && (
+                <p className="choice-subtitle">{option.subtitle}</p>
+              )}
             </div>
           ))}
         </div>

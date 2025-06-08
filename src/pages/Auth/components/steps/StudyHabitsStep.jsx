@@ -4,10 +4,10 @@ const StudyHabitsStep = ({ data, onChange, onValidationChange }) => {
   const [studyHabits, setStudyHabits] = useState(data.studyHabits || '')
 
   const studyOptions = [
-    { id: 'library', title: 'Library studier', emoji: '📚', subtitle: 'I study at the library' },
-    { id: 'home-quiet', title: 'Quiet at home', emoji: '🤫', subtitle: 'Silent study sessions' },
-    { id: 'home-music', title: 'Music at home', emoji: '🎵', subtitle: 'Study with background music' },
-    { id: 'group', title: 'Group study', emoji: '👥', subtitle: 'I prefer studying with others' }
+    { id: 'library', title: 'Library studier', emoji: '📚' },
+    { id: 'home-quiet', title: 'Quiet at home', emoji: '🤫' },
+    { id: 'home-music', title: 'Music at home', emoji: '🎵' },
+    { id: 'group', title: 'Group study', emoji: '👥' }
   ]
 
   useEffect(() => {
@@ -31,7 +31,9 @@ const StudyHabitsStep = ({ data, onChange, onValidationChange }) => {
             >
               <div className="choice-emoji large-choice-emoji">{option.emoji}</div>
               <h3 className="choice-title large-choice-title">{option.title}</h3>
-              <p className="choice-subtitle">{option.subtitle}</p>
+              {option.subtitle && (
+                <p className="choice-subtitle">{option.subtitle}</p>
+              )}
             </div>
           ))}
         </div>
