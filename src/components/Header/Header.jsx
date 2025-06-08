@@ -3,7 +3,7 @@ import { useAuth } from '../../contexts/AuthContext'
 import './Header.css'
 
 const Header = () => {
-  const { user, logout } = useAuth()
+  const { user, userProfile, logout } = useAuth()
   const navigate = useNavigate()
 
   const handleLogout = async () => {
@@ -83,11 +83,11 @@ const Header = () => {
                 <div className="user-profile-clickable" onClick={handleProfileClick}>
                   <img
                     src={getRandomProfileImage()}
-                    alt={user.displayName}
+                    alt={userProfile?.firstName || user.displayName}
                     className="user-avatar"
                   />
                   <div className="user-info">
-                    <span className="user-name">{user.displayName}</span>
+                    <span className="user-name">{userProfile?.firstName || user.displayName}</span>
                   </div>
                 </div>
                 <button onClick={handleLogout} className="logout-btn">
