@@ -7,7 +7,7 @@ import howItWorksImage from '../../../FAQ/assets/images/how_it_works.png'
 import './RetakeQuizSection.css'
 
 const RetakeQuizSection = () => {
-  const { user } = useAuth()
+  const { user, clearUserProfile } = useAuth()
   const navigate = useNavigate()
   const [isRetaking, setIsRetaking] = useState(false)
 
@@ -18,18 +18,22 @@ const RetakeQuizSection = () => {
 
     try {
       setIsRetaking(true)
-      
+
       // Delete user document from Firebase
       await deleteDoc(doc(db, 'users', user.uid))
       console.log('User profile deleted successfully')
-      
-      // Navigate to onboarding
-      navigate('/onboarding')
-      
+
+      // Clear local user profile state immediately
+      clearUserProfile()
+
+      // Small delay to ensure state updates, then navigate
+      setTimeout(() => {
+        navigate('/onboarding', { replace: true })
+      }, 100)
+
     } catch (error) {
       console.error('Error deleting user profile:', error)
       alert('Failed to delete profile. Please try again.')
-    } finally {
       setIsRetaking(false)
     }
   }

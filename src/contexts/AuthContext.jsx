@@ -135,6 +135,12 @@ export const AuthProvider = ({ children }) => {
     return userProfile?.profileComplete === true
   }
 
+  // Clear user profile (for retake quiz functionality)
+  const clearUserProfile = () => {
+    setUserProfile(null)
+    setIsNewUser(true)
+  }
+
   // Test Firebase connection on mount
   useEffect(() => {
     testFirebaseConnection()
@@ -156,10 +162,13 @@ export const AuthProvider = ({ children }) => {
             setIsNewUser(!profileData.profileComplete)
           } else {
             // User document doesn't exist, they are definitely new
+            console.log('User document does not exist, treating as new user')
+            setUserProfile(null)
             setIsNewUser(true)
           }
         } catch (error) {
           console.error('Error fetching user profile:', error)
+          setUserProfile(null)
           setIsNewUser(true) // Assume new user on error
         }
       } else {
@@ -183,6 +192,7 @@ export const AuthProvider = ({ children }) => {
     updateUserProfile,
     isProfileComplete,
     setIsNewUser,
+    clearUserProfile,
     testFirebaseConnection
   }
 
