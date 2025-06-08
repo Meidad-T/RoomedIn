@@ -6,7 +6,7 @@ import {
   setPersistence,
   browserLocalPersistence
 } from 'firebase/auth'
-import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc, connectFirestoreEmulator } from 'firebase/firestore'
 import { auth, googleProvider, db } from '../services/firebase'
 
 const AuthContext = createContext()
@@ -24,6 +24,26 @@ export const AuthProvider = ({ children }) => {
   const [userProfile, setUserProfile] = useState(null)
   const [loading, setLoading] = useState(true)
   const [isNewUser, setIsNewUser] = useState(false)
+
+  // Test Firebase connection
+  const testFirebaseConnection = async () => {
+    try {
+      console.log('Testing Firebase connection...')
+      console.log('Firebase config:', {
+        projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+        authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN
+      })
+
+      // Test Firestore connection
+      const testDoc = doc(db, 'test', 'connection')
+      await getDoc(testDoc)
+      console.log('✅ Firebase connection successful!')
+      return true
+    } catch (error) {
+      console.error('❌ Firebase connection failed:', error)
+      return false
+    }
+  }
 
   // Sign in with Google
   const signInWithGoogle = async () => {
@@ -85,19 +105,27 @@ export const AuthProvider = ({ children }) => {
   const updateUserProfile = async (profileData) => {
     try {
       if (!user) throw new Error('No user logged in')
-      
+
+      console.log('Updating profile for user:', user.uid)
+      console.log('Profile data to save:', profileData)
+
       const updatedProfile = {
         ...userProfile,
         ...profileData,
         updatedAt: new Date()
       }
-      
+
+      console.log('Final profile data:', updatedProfile)
+
       await setDoc(doc(db, 'users', user.uid), updatedProfile, { merge: true })
+      console.log('Profile saved to Firestore successfully!')
+
       setUserProfile(updatedProfile)
-      
+
       return updatedProfile
     } catch (error) {
       console.error('Error updating user profile:', error)
+      console.error('Firebase error details:', error.code, error.message)
       throw error
     }
   }
@@ -106,6 +134,11 @@ export const AuthProvider = ({ children }) => {
   const isProfileComplete = () => {
     return userProfile?.profileComplete === true
   }
+
+  // Test Firebase connection on mount
+  useEffect(() => {
+    testFirebaseConnection()
+  }, [])
 
   // Listen for auth state changes
   useEffect(() => {
@@ -149,7 +182,8 @@ export const AuthProvider = ({ children }) => {
     logout,
     updateUserProfile,
     isProfileComplete,
-    setIsNewUser
+    setIsNewUser,
+    testFirebaseConnection
   }
 
   return (
