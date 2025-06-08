@@ -1,7 +1,31 @@
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../contexts/AuthContext'
 import './Header.css'
 
 const Header = () => {
+  const { user, logout } = useAuth()
+
+  const handleLogout = async () => {
+    try {
+      await logout()
+    } catch (error) {
+      console.error('Logout error:', error)
+    }
+  }
+
+  // Generate random profile image based on user ID
+  const getRandomProfileImage = () => {
+    if (!user?.uid) return '/images/profiles/profile_random_1.png'
+
+    // Use user ID to consistently get same random image for same user
+    const hash = user.uid.split('').reduce((a, b) => {
+      a = ((a << 5) - a) + b.charCodeAt(0)
+      return a & a
+    }, 0)
+
+    const imageNumber = Math.abs(hash % 6) + 1
+    return `/images/profiles/profile_random_${imageNumber}.png`
+  }
   return (
     <header className="header">
       <div className="container">
@@ -49,15 +73,31 @@ const Header = () => {
               </div>
               FAQ
             </Link>
-            <a href="#signin" className="nav-link">
-              <div className="nav-icon">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="10" cy="7" r="3" stroke="currentColor" strokeWidth="1.5"/>
-                  <path d="M4 18c0-4 2.5-6 6-6s6 2 6 6" stroke="currentColor" strokeWidth="1.5"/>
-                </svg>
+            {user ? (
+              <div className="user-profile">
+                <img
+                  src={getRandomProfileImage()}
+                  alt={user.displayName}
+                  className="user-avatar"
+                />
+                <div className="user-info">
+                  <span className="user-name">{user.displayName}</span>
+                  <button onClick={handleLogout} className="logout-btn">
+                    Sign out
+                  </button>
+                </div>
               </div>
-              Sign in
-            </a>
+            ) : (
+              <Link to="/signin" className="nav-link">
+                <div className="nav-icon">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="7" r="3" stroke="currentColor" strokeWidth="1.5"/>
+                    <path d="M4 18c0-4 2.5-6 6-6s6 2 6 6" stroke="currentColor" strokeWidth="1.5"/>
+                  </svg>
+                </div>
+                Sign in
+              </Link>
+            )}
           </nav>
         </div>
       </div>
