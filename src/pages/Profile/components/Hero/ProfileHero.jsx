@@ -1,8 +1,13 @@
+import { useState } from 'react'
 import { useAuth } from '../../../../contexts/AuthContext'
 import './ProfileHero.css'
 
 const ProfileHero = ({ userProfile, isVisible }) => {
-  const { user } = useAuth()
+  const { user, updateUserProfile } = useAuth()
+  const [isEditing, setIsEditing] = useState(false)
+  const [editedName, setEditedName] = useState(`${userProfile.firstName} ${userProfile.lastName}`)
+  const [editedBio, setEditedBio] = useState(userProfile.bio || "Looking for a roommate that shares my passions!")
+  const [isSaving, setIsSaving] = useState(false)
 
   // Generate random profile image based on user ID
   const getRandomProfileImage = () => {
@@ -35,6 +40,36 @@ const ProfileHero = ({ userProfile, isVisible }) => {
 
   const age = calculateAge(userProfile.birthday)
 
+  const handleSave = async () => {
+    try {
+      setIsSaving(true)
+
+      // Split the edited name into first and last name
+      const nameParts = editedName.trim().split(' ')
+      const firstName = nameParts[0] || ''
+      const lastName = nameParts.slice(1).join(' ') || ''
+
+      await updateUserProfile({
+        firstName,
+        lastName,
+        bio: editedBio.trim()
+      })
+
+      setIsEditing(false)
+    } catch (error) {
+      console.error('Error updating profile:', error)
+      alert('Failed to update profile. Please try again.')
+    } finally {
+      setIsSaving(false)
+    }
+  }
+
+  const handleCancel = () => {
+    setEditedName(`${userProfile.firstName} ${userProfile.lastName}`)
+    setEditedBio(userProfile.bio || "Looking for a roommate that shares my passions!")
+    setIsEditing(false)
+  }
+
   return (
     <section className="profile-hero">
       <div className="profile-hero-background">
@@ -48,6 +83,20 @@ const ProfileHero = ({ userProfile, isVisible }) => {
         <div className="container">
           <div className="profile-hero-content">
             <div className={`profile-hero-card ${isVisible ? 'animate-in' : ''}`}>
+              {/* Edit button - positioned absolutely */}
+              {!isEditing && (
+                <button
+                  onClick={() => setIsEditing(true)}
+                  className="profile-edit-btn-absolute"
+                  title="Edit name and bio"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="m18.5 2.5 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+              )}
+
               <div className="profile-avatar-container">
                 <img
                   src={getRandomProfileImage()}
@@ -56,20 +105,60 @@ const ProfileHero = ({ userProfile, isVisible }) => {
                 />
                 <div className="profile-status-indicator"></div>
               </div>
-              
+
               <div className="profile-basic-info">
-                <h1 className="profile-name">
-                  {userProfile.firstName} {userProfile.lastName}
-                </h1>
-                <div className="profile-details">
-                  <span className="profile-university">{userProfile.university}</span>
-                  {age && <span className="profile-age">{age} years old</span>}
-                </div>
-                <div className="profile-academic">
-                  <span className="profile-major">{userProfile.major}</span>
-                  {userProfile.minor && <span className="profile-minor">Minor: {userProfile.minor}</span>}
-                  <span className="profile-graduation">Class of {userProfile.graduationYear}</span>
-                </div>
+                {isEditing ? (
+                  <div className="profile-edit-form">
+                    <input
+                      type="text"
+                      value={editedName}
+                      onChange={(e) => setEditedName(e.target.value)}
+                      className="profile-name-input"
+                      placeholder="Your name"
+                      maxLength={50}
+                    />
+                    <textarea
+                      value={editedBio}
+                      onChange={(e) => setEditedBio(e.target.value)}
+                      className="profile-bio-input"
+                      placeholder="Looking for a roommate that shares my passions!"
+                      maxLength={45}
+                      rows={2}
+                    />
+                    <div className="profile-edit-actions">
+                      <button
+                        onClick={handleSave}
+                        disabled={isSaving}
+                        className="profile-save-btn"
+                      >
+                        {isSaving ? 'Saving...' : 'Save'}
+                      </button>
+                      <button
+                        onClick={handleCancel}
+                        className="profile-cancel-btn"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <h1 className="profile-name">
+                      {userProfile.firstName} {userProfile.lastName}
+                    </h1>
+                    <div className="profile-bio-green">
+                      {userProfile.bio || "Looking for a roommate that shares my passions!"}
+                    </div>
+                    <div className="profile-graduation">Class of {userProfile.graduationYear}</div>
+                    <div className="profile-details">
+                      {age && <span className="profile-age">{age} years old</span>}
+                    </div>
+                    <div className="profile-academic">
+                      <span className="profile-major">{userProfile.major}</span>
+                      {userProfile.minor && <span className="profile-minor">Minor: {userProfile.minor}</span>}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
             
@@ -79,11 +168,18 @@ const ProfileHero = ({ userProfile, isVisible }) => {
                 <span className="profile-hero-brand">Profile</span>
               </h2>
               <p className="profile-hero-subtitle">
-                Here's everything about you that helps us find your perfect roommate! 
-                <br />
-                🐵 Your answers help create the best matches!
+                Your profile is based on your answers when you signed up. This is what others see when they match with you!
               </p>
             </div>
+          </div>
+        </div>
+
+        {/* Scroll down arrow */}
+        <div className="scroll-indicator">
+          <div className="scroll-arrow">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 13l5 5 5-5M7 6l5 5 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </div>
         </div>
       </div>

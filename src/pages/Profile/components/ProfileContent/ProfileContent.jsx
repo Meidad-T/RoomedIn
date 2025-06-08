@@ -98,7 +98,7 @@ const ProfileContent = ({ userProfile, isVisible }) => {
         <div className="profile-content-header">
           <h2 className="profile-content-title">Your Profile Details</h2>
           <p className="profile-content-subtitle">
-            Here are all your answers that help us find your perfect roommate match! 🐵
+            Here are all your answers that help us find your perfect roommate match!
           </p>
         </div>
 
