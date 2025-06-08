@@ -70,6 +70,8 @@ const ProfileHero = ({ userProfile, isVisible }) => {
     setIsEditing(false)
   }
 
+
+
   return (
     <section className="profile-hero">
       <div className="profile-hero-background">
@@ -150,12 +152,12 @@ const ProfileHero = ({ userProfile, isVisible }) => {
                       {userProfile.bio || "Looking for a roommate that shares my passions!"}
                     </div>
                     <div className="profile-graduation">Class of {userProfile.graduationYear}</div>
+                    <div className="profile-academic">
+                      <span className="profile-major">Major: {userProfile.major}</span>
+                      {userProfile.minor && <span className="profile-minor">Minor: {userProfile.minor}</span>}
+                    </div>
                     <div className="profile-details">
                       {age && <span className="profile-age">{age} years old</span>}
-                    </div>
-                    <div className="profile-academic">
-                      <span className="profile-major">{userProfile.major}</span>
-                      {userProfile.minor && <span className="profile-minor">Minor: {userProfile.minor}</span>}
                     </div>
                   </>
                 )}
