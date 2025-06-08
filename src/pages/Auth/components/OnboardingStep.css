@@ -264,6 +264,7 @@
 }
 
 /* Pets, Study, Social, Sleep Layout (4 cards in 1 row) */
+/* THIS IS WHAT IS USED FOR THE PETS QUESTION CARDS!! */
 .choice-grid.four-column {
   display: flex;
   gap: 1.5rem;
