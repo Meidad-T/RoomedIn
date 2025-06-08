@@ -4,6 +4,7 @@ import { useAuth } from '../../contexts/AuthContext'
 import ProfileHeader from './components/Header/ProfileHeader'
 import ProfileHero from './components/Hero/ProfileHero'
 import ProfileContent from './components/ProfileContent/ProfileContent'
+import RetakeQuizSection from './components/RetakeQuiz/RetakeQuizSection'
 import './ProfilePage.css'
 
 const ProfilePage = () => {
@@ -58,6 +59,7 @@ const ProfilePage = () => {
       <main className="profile-main">
         <ProfileHero userProfile={userProfile} isVisible={isVisible} />
         <ProfileContent userProfile={userProfile} isVisible={isVisible} />
+        <RetakeQuizSection />
       </main>
     </div>
   )
