@@ -1,0 +1,232 @@
+.profile-content {
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+  padding: 6rem 0;
+}
+
+.profile-content-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.profile-content-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.profile-content-subtitle {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--text-light);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Profile Sections */
+.profile-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.profile-section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.profile-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.profile-section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.profile-section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--section-color);
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.profile-section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: var(--section-color);
+  border-radius: 2px;
+}
+
+/* Fields Grid */
+.profile-fields-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.profile-field-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-field-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--section-color);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.profile-field-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+  border-color: var(--section-color);
+}
+
+.profile-field-card:hover::before {
+  transform: scaleX(1);
+}
+
+.profile-field-icon {
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: rgba(46, 204, 113, 0.1);
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.profile-field-card:hover .profile-field-icon {
+  background: var(--section-color);
+  transform: scale(1.1);
+}
+
+.profile-field-content {
+  flex: 1;
+}
+
+.profile-field-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.profile-field-value {
+  font-size: 1rem;
+  color: var(--text-light);
+  line-height: 1.4;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+/* Section Background Variations */
+.profile-section:nth-child(odd) {
+  background: #ffffff;
+}
+
+.profile-section:nth-child(even) {
+  background: #f8fafc;
+  padding: 4rem 0;
+  margin: 0 -2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-content {
+    padding: 4rem 0;
+  }
+  
+  .profile-sections {
+    gap: 3rem;
+  }
+  
+  .profile-section-header {
+    margin-bottom: 2rem;
+  }
+  
+  .profile-section-title {
+    font-size: 2rem;
+  }
+  
+  .profile-fields-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .profile-field-card {
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+  
+  .profile-field-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-content {
+    padding: 3rem 0;
+  }
+  
+  .profile-content-header {
+    margin-bottom: 3rem;
+  }
+  
+  .profile-field-card {
+    padding: 1.25rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .profile-field-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 2.5rem;
+  }
+  
+  .profile-section:nth-child(even) {
+    margin: 0 -1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

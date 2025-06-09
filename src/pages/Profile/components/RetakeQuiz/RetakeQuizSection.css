@@ -1,0 +1,140 @@
+.retake-quiz-section {
+  background: #f8fafc;
+  padding: 4rem 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.retake-quiz-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.retake-quiz-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.retake-quiz-img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.retake-quiz-img:hover {
+  transform: scale(1.05);
+}
+
+.retake-quiz-text {
+  text-align: left;
+}
+
+.retake-quiz-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.retake-quiz-description {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--text-light);
+  margin-bottom: 2rem;
+  max-width: 500px;
+}
+
+.retake-quiz-btn {
+  background: var(--primary-green);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.retake-quiz-btn:hover:not(:disabled) {
+  background: var(--primary-green-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(46, 204, 113, 0.4);
+}
+
+.retake-quiz-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.retake-quiz-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.retake-quiz-btn:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .retake-quiz-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .retake-quiz-text {
+    text-align: center;
+  }
+  
+  .retake-quiz-title {
+    font-size: 2rem;
+  }
+  
+  .retake-quiz-img {
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .retake-quiz-section {
+    padding: 3rem 0;
+  }
+  
+  .retake-quiz-title {
+    font-size: 1.75rem;
+  }
+  
+  .retake-quiz-description {
+    font-size: 1.1rem;
+  }
+  
+  .retake-quiz-btn {
+    padding: 0.875rem 1.75rem;
+    font-size: 1rem;
+  }
+  
+  .retake-quiz-img {
+    max-width: 200px;
+  }
+}
