@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 import './Header.css'
 
 const Header = () => {
-  const { user, logout } = useAuth()
+  const { user, userProfile, logout } = useAuth()
+  const navigate = useNavigate()
 
   const handleLogout = async () => {
     try {
@@ -11,6 +12,10 @@ const Header = () => {
     } catch (error) {
       console.error('Logout error:', error)
     }
+  }
+
+  const handleProfileClick = () => {
+    navigate('/profile')
   }
 
   // Generate random profile image based on user ID
@@ -75,17 +80,19 @@ const Header = () => {
             </Link>
             {user ? (
               <div className="user-profile">
-                <img
-                  src={getRandomProfileImage()}
-                  alt={user.displayName}
-                  className="user-avatar"
-                />
-                <div className="user-info">
-                  <span className="user-name">{user.displayName}</span>
-                  <button onClick={handleLogout} className="logout-btn">
-                    Sign out
-                  </button>
+                <div className="user-profile-clickable" onClick={handleProfileClick}>
+                  <img
+                    src={getRandomProfileImage()}
+                    alt={userProfile?.firstName || user.displayName}
+                    className="user-avatar"
+                  />
+                  <div className="user-info">
+                    <span className="user-name">{userProfile?.firstName || user.displayName}</span>
+                  </div>
                 </div>
+                <button onClick={handleLogout} className="logout-btn">
+                  Sign out
+                </button>
               </div>
             ) : (
               <Link to="/signin" className="nav-link">

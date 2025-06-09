@@ -5,6 +5,7 @@ import Header from './components/Header/Header'
 import Hero from './components/Hero/Hero'
 import Mission from './components/Mission/Mission'
 import FAQPage from './pages/FAQ/FAQPage'
+import ProfilePage from './pages/Profile/ProfilePage'
 import { SignInPage, OnboardingPage } from './pages/Auth'
 import './App.css'
 
@@ -33,6 +34,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <OnboardingPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
               </ProtectedRoute>
             }
           />
