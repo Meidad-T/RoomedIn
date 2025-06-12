@@ -6,6 +6,7 @@ import Hero from './components/Hero/Hero'
 import Mission from './components/Mission/Mission'
 import FAQPage from './pages/FAQ/FAQPage'
 import ProfilePage from './pages/Profile/ProfilePage'
+import MatchesPage from './pages/Matches/MatchesPage'
 import { SignInPage, OnboardingPage } from './pages/Auth'
 import './App.css'
 
@@ -42,6 +43,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/matches/:universityId"
+            element={
+              <ProtectedRoute>
+                <MatchesPage />
               </ProtectedRoute>
             }
           />

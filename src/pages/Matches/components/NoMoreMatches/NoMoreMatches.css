@@ -1,0 +1,266 @@
+/* No More Matches Styles */
+.no-more-matches {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 2rem;
+}
+
+.no-more-content {
+  text-align: center;
+  max-width: 500px;
+  background: white;
+  border-radius: 24px;
+  padding: 3rem 2rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Image */
+.no-more-image {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.no-more-img,
+.no-more-fallback {
+  max-width: 200px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  opacity: 0.8;
+}
+
+.no-more-fallback {
+  max-width: 150px;
+}
+
+/* Text Content */
+.no-more-text {
+  margin-bottom: 2rem;
+}
+
+.no-more-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.no-more-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+.university-highlight {
+  color: var(--primary-green);
+  font-weight: 600;
+}
+
+.no-more-suggestion {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* Action Buttons */
+.no-more-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.back-home-btn,
+.refresh-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.back-home-btn {
+  background: var(--primary-green);
+  color: white;
+  box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+}
+
+.back-home-btn:hover {
+  background: var(--primary-green-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+}
+
+.refresh-btn {
+  background: #f3f4f6;
+  color: var(--text-dark);
+  border: 2px solid #e5e7eb;
+}
+
+.refresh-btn:hover {
+  background: #e5e7eb;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.back-home-btn::before,
+.refresh-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.back-home-btn:hover::before,
+.refresh-btn:hover::before {
+  left: 100%;
+}
+
+/* Tips Section */
+.no-more-tips {
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: left;
+}
+
+.tips-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.tips-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tips-list li {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+  line-height: 1.4;
+}
+
+.tips-list li::before {
+  content: '•';
+  color: var(--primary-green);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  font-size: 1.2rem;
+}
+
+.tips-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .no-more-matches {
+    padding: 1rem;
+    min-height: 50vh;
+  }
+  
+  .no-more-content {
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+  }
+  
+  .no-more-title {
+    font-size: 1.8rem;
+  }
+  
+  .no-more-description {
+    font-size: 1.1rem;
+  }
+  
+  .no-more-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .back-home-btn,
+  .refresh-btn {
+    width: 100%;
+    max-width: 250px;
+    justify-content: center;
+  }
+  
+  .no-more-img,
+  .no-more-fallback {
+    max-width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .no-more-content {
+    padding: 1.5rem 1rem;
+    margin: 0 0.5rem;
+  }
+  
+  .no-more-title {
+    font-size: 1.5rem;
+  }
+  
+  .no-more-description {
+    font-size: 1rem;
+  }
+  
+  .no-more-suggestion {
+    font-size: 0.9rem;
+  }
+  
+  .back-home-btn,
+  .refresh-btn {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.9rem;
+  }
+  
+  .tips-title {
+    font-size: 1rem;
+  }
+  
+  .tips-list li {
+    font-size: 0.9rem;
+  }
+  
+  .no-more-img,
+  .no-more-fallback {
+    max-width: 120px;
+  }
+}
