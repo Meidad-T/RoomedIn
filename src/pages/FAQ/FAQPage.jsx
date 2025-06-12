@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import FAQHeader from './components/Header/FAQHeader'
+import Header from '../../components/Header/Header'
 import FAQHero from './components/Hero/FAQHero'
 import FAQSection from './components/FAQSection/FAQSection'
 import './FAQPage.css'
@@ -19,7 +19,7 @@ const FAQPage = () => {
 
   return (
     <div className="faq-page">
-      <FAQHeader />
+      <Header />
       <main className="faq-main">
         <FAQHero />
         <FAQSection />
