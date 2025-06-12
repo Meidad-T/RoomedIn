@@ -150,7 +150,7 @@ const MatchesPage = () => {
       <div className="matches-page">
         <Header />
         <div className="matches-content">
-          <NoMoreMatches universityName={matches[0]?.university || 'this university'} />
+          <NoMoreMatches universityName={matches[0]?.universityName || 'this university'} />
         </div>
       </div>
     )
