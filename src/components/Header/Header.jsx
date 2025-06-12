@@ -35,8 +35,8 @@ const Header = () => {
     <header className="header">
       <div className="container">
         <div className="header-content">
-          {/* Logo */}
-          <div className="logo">
+          {/* Logo - Clickable to Home */}
+          <Link to="/" className="logo">
             <div className="logo-icon">
               <img
                 src="/src/assets/images/Nav_bar_logo.png"
@@ -65,7 +65,7 @@ const Header = () => {
                 <path d="M16 24h8" stroke="var(--primary-green-dark)" strokeWidth="1.5" strokeLinecap="round"/>
               </svg>
             </div>
-          </div>
+          </Link>
 
           {/* Navigation */}
           <nav className="nav">

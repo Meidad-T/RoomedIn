@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 import UniversitySearch from '../UniversitySearch/UniversitySearch'
 import AuthModal from '../AuthModal'
@@ -7,6 +8,7 @@ import './Hero.css'
 const Hero = () => {
   const [showAuthModal, setShowAuthModal] = useState(false)
   const { user, userProfile } = useAuth()
+  const navigate = useNavigate()
 
   const handleUniversitySelect = (university) => {
     // Check if user is authenticated and has complete profile
@@ -22,7 +24,10 @@ const Hero = () => {
     }
 
     console.log('Selected university:', university)
-    // TODO: Navigate to university page or handle selection
+    console.log('Navigating to matches for university ID:', university.id)
+
+    // Navigate to matches page with university ID
+    navigate(`/matches/${university.id}`)
   }
 
   return (

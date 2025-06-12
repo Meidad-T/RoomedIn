@@ -1,0 +1,188 @@
+/* Matches Page Styles */
+.matches-page {
+  min-height: 100vh;
+  background: white;
+}
+
+.matches-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  position: relative;
+}
+
+/* Header */
+.matches-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.matches-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.university-name {
+  color: var(--primary-green);
+  font-weight: 800;
+}
+
+.matches-progress {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--primary-green);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+}
+
+/* Match Card Container */
+.match-card-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+/* Loading State */
+.loading-state {
+  text-align: center;
+  color: var(--text-dark);
+  padding: 4rem 2rem;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #e5e7eb;
+  border-top: 4px solid var(--primary-green);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-state p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+/* Error State */
+.error-state {
+  text-align: center;
+  color: var(--text-dark);
+  padding: 4rem 2rem;
+}
+
+.error-state p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: var(--text-light);
+}
+
+.back-home-btn {
+  background: var(--primary-green);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+}
+
+.back-home-btn:hover {
+  background: var(--primary-green-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+}
+
+/* Toast Message */
+.toast-message {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100px);
+  background: var(--primary-green);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toast-message.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .matches-page {
+    padding: 1rem 0.5rem;
+  }
+  
+  .matches-container {
+    max-width: 100%;
+  }
+  
+  .matches-header {
+    margin-bottom: 1rem;
+    padding: 0 0.5rem;
+  }
+  
+  .back-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+  
+  .matches-progress {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .matches-page {
+    padding: 0.5rem;
+  }
+  
+  .loading-state,
+  .error-state {
+    padding: 3rem 1rem;
+  }
+  
+  .error-state h2 {
+    font-size: 1.5rem;
+  }
+  
+  .toast-message {
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    transform: translateY(-100px);
+    max-width: none;
+  }
+  
+  .toast-message.show {
+    transform: translateY(0);
+  }
+}

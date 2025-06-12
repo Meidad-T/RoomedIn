@@ -41,11 +41,9 @@
   display: none;
 }
 
-.logo-text {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--primary-green);
-  letter-spacing: -0.02em;
+.logo:hover {
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
 }
 
 /* Navigation Styles */
@@ -98,9 +96,7 @@
     font-size: 0.9rem;
   }
   
-  .logo-text {
-    font-size: 1.25rem;
-  }
+
 }
 
 @media (max-width: 480px) {
