@@ -2,7 +2,7 @@
  * University Search Component
  * Integrates with existing Hero search UI without changing it
  */
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { useUniversitySearch } from '../../hooks/useUniversitySearch'
 import './UniversitySearch.css'
 
@@ -19,17 +19,33 @@ const UniversitySearch = ({ onUniversitySelect }) => {
     openDropdown
   } = useUniversitySearch()
 
-
-
+  const [selectedUniversity, setSelectedUniversity] = useState(null)
   const containerRef = useRef(null)
 
   /**
-   * Handle university selection
+   * Handle university selection from dropdown - just fills the input
    */
   const onSelectUniversity = (university) => {
     const selectedUniversity = handleUniversitySelect(university)
-    if (onUniversitySelect) {
+    setSelectedUniversity(selectedUniversity)
+    // Don't navigate immediately - wait for search button or enter
+  }
+
+  /**
+   * Handle search execution - navigate to matches
+   */
+  const executeSearch = () => {
+    if (selectedUniversity && onUniversitySelect) {
       onUniversitySelect(selectedUniversity)
+    }
+  }
+
+  /**
+   * Handle Enter key press
+   */
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && selectedUniversity) {
+      executeSearch()
     }
   }
 
@@ -90,6 +106,7 @@ const UniversitySearch = ({ onUniversitySelect }) => {
             value={searchText}
             onChange={(e) => handleSearchChange(e.target.value)}
             onFocus={openDropdown}
+            onKeyPress={handleKeyPress}
             className="search-input"
             autoComplete="off"
           />
@@ -101,7 +118,12 @@ const UniversitySearch = ({ onUniversitySelect }) => {
           )}
         </div>
         
-        <button type="button" className="search-button" disabled>
+        <button
+          type="button"
+          className="search-button"
+          onClick={executeSearch}
+          disabled={!selectedUniversity}
+        >
           Search
         </button>
       </div>

@@ -3,6 +3,7 @@ import './MatchCard.css'
 
 const MatchCard = ({ match, onSendRequest, onSkip, onReject }) => {
   const [imageError, setImageError] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false)
 
   // Generate random profile image (same logic as header)
   const getRandomProfileImage = () => {
@@ -41,139 +42,170 @@ const MatchCard = ({ match, onSendRequest, onSkip, onReject }) => {
     return arr.join(', ')
   }
 
+  // Generate random solid color for profile background
+  const getRandomColor = () => {
+    if (!match?.id) return '#3498db'
+
+    const colors = [
+      '#3498db', '#e74c3c', '#2ecc71', '#f39c12',
+      '#9b59b6', '#1abc9c', '#e67e22', '#34495e'
+    ]
+
+    const hash = match.id.split('').reduce((a, b) => {
+      a = ((a << 5) - a) + b.charCodeAt(0)
+      return a & a
+    }, 0)
+
+    return colors[Math.abs(hash % colors.length)]
+  }
+
+  // Get emoji for field
+  const getEmojiForField = (field, value) => {
+    const emojiMap = {
+      gender: { male: '👨', female: '👩', 'non-binary': '🧑', other: '👤' },
+      major: '🎓',
+      smoking: { never: '🚭', occasionally: '🚬', regularly: '🚬', socially: '🚬' },
+      drinking: { never: '🚫', occasionally: '🍷', regularly: '🍺', socially: '🥂' },
+      pets: { none: '🚫', cats: '🐱', dogs: '🐶', both: '🐾', other: '🐹' },
+      cleanliness: { 'very-clean': '✨', clean: '🧹', average: '🏠', messy: '🌪️' },
+      studyHabits: { 'very-quiet': '🤫', quiet: '📚', moderate: '🎧', social: '👥' },
+      socialLevel: { introvert: '🏠', ambivert: '⚖️', extrovert: '🎉' },
+      sleepSchedule: { 'early-bird': '🌅', normal: '😴', 'night-owl': '🦉', irregular: '🔄' },
+      sexuality: { straight: '💙', gay: '🏳️‍🌈', lesbian: '🏳️‍🌈', bisexual: '💜', other: '❤️' },
+      religion: { christian: '✝️', muslim: '☪️', jewish: '✡️', hindu: '🕉️', buddhist: '☸️', other: '🙏', none: '🌟' }
+    }
+
+    if (field === 'major') return '🎓'
+    return emojiMap[field]?.[value] || '📝'
+  }
+
   return (
     <div className="match-card-wrapper">
       {/* Left Action Button */}
-      <button 
+      <button
         onClick={onReject}
         className="side-action-btn left-action-btn reject-btn"
         title="Not interested"
       >
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
           <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
         </svg>
       </button>
 
-      {/* Main Card */}
+      {/* Simple Card */}
       <div className="match-card">
-        {/* Left Side - Profile */}
-        <div className="match-left-side">
-          {/* Profile Image */}
-          <div className="match-image-container">
-            <img
-              src={getRandomProfileImage()}
-              alt={`${match.firstName} ${match.lastName}`}
-              className="match-image"
-              onError={() => setImageError(true)}
-            />
-            <div className="match-status-indicator"></div>
-          </div>
-
-          {/* Basic Info */}
-          <div className="match-basic-info">
-            <h2 className="match-name">{match.firstName} {match.lastName}</h2>
-            {age && <p className="match-age">{age} years old</p>}
-            <p className="match-bio">{match.bio || "Looking for a roommate that shares my passions!"}</p>
-          </div>
-
-          {/* Skip Button (Center) */}
-          <div className="center-action">
-            <button 
-              onClick={onSkip}
-              className="action-btn skip-btn"
-              title="Skip for now"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              Skip for now
-            </button>
-          </div>
+        {/* Profile Header */}
+        <div className="match-header" style={{ backgroundColor: getRandomColor() }}>
+          <img
+            src={getRandomProfileImage()}
+            alt={`${match.firstName} ${match.lastName}`}
+            className="match-avatar"
+            onError={() => setImageError(true)}
+          />
+          <h2 className="match-name">{match.firstName} {match.lastName}</h2>
         </div>
 
-        {/* Right Side - Details */}
-        <div className="match-right-side">
-          {/* Academic Info */}
-          <div className="match-section">
-            <h3 className="section-title">Academic</h3>
-            <div className="info-grid">
-              <div className="info-item">
-                <span className="info-label">Major:</span>
-                <span className="info-value">{match.major || 'Not specified'}</span>
-              </div>
-              <div className="info-item">
-                <span className="info-label">Graduation:</span>
-                <span className="info-value">Class of {match.graduationYear || 'N/A'}</span>
-              </div>
+        {/* Basic Info */}
+        <div className="match-body">
+          <div className="basic-info">
+            <div className="info-item">
+              <span className="info-icon">🎂</span>
+              <span className="info-text">{age || 'N/A'} years old</span>
+            </div>
+            <div className="info-item">
+              <span className="info-icon">{getEmojiForField('gender', match.gender)}</span>
+              <span className="info-text">{match.gender || 'Not specified'}</span>
+            </div>
+            <div className="info-item">
+              <span className="info-icon">🎓</span>
+              <span className="info-text">{match.major || 'Not specified'}</span>
             </div>
           </div>
 
-          {/* Personal Info */}
-          <div className="match-section">
-            <h3 className="section-title">Personal</h3>
-            <div className="info-grid">
-              <div className="info-item">
-                <span className="info-label">Gender:</span>
-                <span className="info-value">{match.gender || 'Not specified'}</span>
+          {/* Expandable Details */}
+          {isExpanded && (
+            <div className="expanded-details">
+              <div className="detail-row">
+                <span className="detail-label">Sexuality:</span>
+                <span className="detail-value">{match.sexuality || 'Not specified'}</span>
               </div>
-              <div className="info-item">
-                <span className="info-label">Sexuality:</span>
-                <span className="info-value">{match.sexuality || 'Not specified'}</span>
+              <div className="detail-row">
+                <span className="detail-label">Religion:</span>
+                <span className="detail-value">{match.religion || 'Not specified'}</span>
               </div>
-              <div className="info-item">
-                <span className="info-label">Religion:</span>
-                <span className="info-value">{match.religion || 'Not specified'}</span>
+              <div className="detail-row">
+                <span className="detail-label">Smoking:</span>
+                <span className="detail-value">{match.smoking || 'Not specified'}</span>
               </div>
+              <div className="detail-row">
+                <span className="detail-label">Drinking:</span>
+                <span className="detail-value">{match.drinking || 'Not specified'}</span>
+              </div>
+              <div className="detail-row">
+                <span className="detail-label">Pets:</span>
+                <span className="detail-value">{formatArray(match.pets)}</span>
+              </div>
+              <div className="detail-row">
+                <span className="detail-label">Sleep Schedule:</span>
+                <span className="detail-value">{match.sleepSchedule || 'Not specified'}</span>
+              </div>
+              <div className="detail-row">
+                <span className="detail-label">Cleanliness:</span>
+                <span className="detail-value">{match.cleanliness || 'Not specified'}</span>
+              </div>
+              <div className="detail-row">
+                <span className="detail-label">Study Habits:</span>
+                <span className="detail-value">{match.studyHabits || 'Not specified'}</span>
+              </div>
+              <div className="detail-row">
+                <span className="detail-label">Social Level:</span>
+                <span className="detail-value">{match.socialLevel || 'Not specified'}</span>
+              </div>
+              <div className="detail-row">
+                <span className="detail-label">Hobbies:</span>
+                <span className="detail-value">{formatArray(match.hobbies)}</span>
+              </div>
+              <div className="detail-row">
+                <span className="detail-label">Interests:</span>
+                <span className="detail-value">{formatArray(match.interests)}</span>
+              </div>
+              {match.bio && (
+                <div className="detail-row bio-row">
+                  <span className="detail-label">About:</span>
+                  <span className="detail-value">{match.bio}</span>
+                </div>
+              )}
             </div>
-          </div>
+          )}
 
-          {/* Lifestyle */}
-          <div className="match-section">
-            <h3 className="section-title">Lifestyle</h3>
-            <div className="info-grid">
-              <div className="info-item">
-                <span className="info-label">Smoking:</span>
-                <span className="info-value">{match.smoking || 'Not specified'}</span>
-              </div>
-              <div className="info-item">
-                <span className="info-label">Drinking:</span>
-                <span className="info-value">{match.drinking || 'Not specified'}</span>
-              </div>
-              <div className="info-item">
-                <span className="info-label">Sleep Schedule:</span>
-                <span className="info-value">{match.sleepSchedule || 'Not specified'}</span>
-              </div>
-            </div>
-          </div>
+          {/* Action Buttons */}
+          <div className="match-actions">
+            <button
+              onClick={onSkip}
+              className="action-btn skip-btn"
+            >
+              Skip
+            </button>
 
-          {/* Interests */}
-          <div className="match-section">
-            <h3 className="section-title">Interests</h3>
-            <div className="info-grid">
-              <div className="info-item full-width">
-                <span className="info-label">Hobbies:</span>
-                <span className="info-value">{formatArray(match.hobbies)}</span>
-              </div>
-              <div className="info-item full-width">
-                <span className="info-label">Interests:</span>
-                <span className="info-value">{formatArray(match.interests)}</span>
-              </div>
-              <div className="info-item full-width">
-                <span className="info-label">Pets:</span>
-                <span className="info-value">{formatArray(match.pets)}</span>
-              </div>
-            </div>
+            <button
+              className="action-btn expand-btn"
+              onClick={() => setIsExpanded(!isExpanded)}
+            >
+              {isExpanded ? 'Show Less' : 'Read More'}
+            </button>
           </div>
         </div>
       </div>
 
+
+
       {/* Right Action Button */}
-      <button 
+      <button
         onClick={onSendRequest}
         className="side-action-btn right-action-btn match-btn"
         title="Send chat request"
       >
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
           <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       </button>
