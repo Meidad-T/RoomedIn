@@ -12,7 +12,7 @@ import { db } from './firebase'
 
 /**
  * Get all potential matches for a user at a specific university
- * 
+ *
  * @param {string} universityId - The university document ID
  * @param {string} currentUserId - Current user's ID to exclude from results
  * @returns {Promise<Array>} Array of potential match user profiles
@@ -21,6 +21,9 @@ export const getUniversityMatches = async (universityId, currentUserId) => {
   try {
     console.log('MatchingService: Fetching matches for university:', universityId)
     console.log('MatchingService: Excluding current user:', currentUserId)
+
+    // Get university name first
+    const universityName = await getUniversityName(universityId)
 
     // Create query to find all users at the same university
     // This is O(1) because 'university' field should be indexed in Firestore
@@ -33,26 +36,27 @@ export const getUniversityMatches = async (universityId, currentUserId) => {
 
     // Execute the query
     const querySnapshot = await getDocs(universityQuery)
-    
+
     // Process results and filter out current user
     const matches = []
     querySnapshot.forEach((doc) => {
       const userData = doc.data()
-      
+
       // Skip current user
       if (doc.id === currentUserId) {
         return
       }
 
-      // Add user data with document ID
+      // Add user data with document ID and university name
       matches.push({
         id: doc.id,
+        universityName: universityName,
         ...userData
       })
     })
 
     console.log(`MatchingService: Found ${matches.length} potential matches`)
-    
+
     // Shuffle array to randomize order (optional)
     return shuffleArray(matches)
 
@@ -80,18 +84,32 @@ const shuffleArray = (array) => {
 
 /**
  * Get university name by ID (for display purposes)
- * 
+ *
  * @param {string} universityId - University document ID
  * @returns {Promise<string>} University name
  */
 export const getUniversityName = async (universityId) => {
   try {
-    // TODO: Implement university lookup if needed
-    // For now, return the ID as name
-    return universityId
+    // Import here to avoid circular dependency
+    const { doc, getDoc } = await import('firebase/firestore')
+
+    console.log('MatchingService: Fetching university name for ID:', universityId)
+
+    // Get university document from universities collection
+    const universityDoc = await getDoc(doc(db, 'universities', universityId))
+
+    if (universityDoc.exists()) {
+      const universityData = universityDoc.data()
+      const universityName = universityData.name || universityData.university_name || 'Unknown University'
+      console.log('MatchingService: Found university name:', universityName)
+      return universityName
+    } else {
+      console.log('MatchingService: University document not found, using ID as fallback')
+      return universityId
+    }
   } catch (error) {
     console.error('MatchingService: Error fetching university name:', error)
-    return 'Unknown University'
+    return universityId // Fallback to ID if error
   }
 }
 

@@ -6,65 +6,64 @@ const NoMoreMatches = ({ universityName }) => {
 
   return (
     <div className="no-more-matches">
-      <div className="no-more-content">
-        {/* Image */}
-        <div className="no-more-image">
-          <img
-            src="/src/pages/Matches/assets/images/no_more_options.png"
-            alt="No more options"
-            className="no-more-img"
-            onError={(e) => {
-              // Fallback if image not found
-              e.target.style.display = 'none'
-              e.target.nextElementSibling.style.display = 'block'
-            }}
-          />
-          {/* Fallback SVG */}
-          <svg 
-            width="200" 
-            height="200" 
-            viewBox="0 0 200 200" 
-            fill="none" 
-            xmlns="http://www.w3.org/2000/svg"
-            className="no-more-fallback"
-            style={{ display: 'none' }}
-          >
-            <circle cx="100" cy="100" r="80" fill="#f3f4f6" stroke="#e5e7eb" strokeWidth="2"/>
-            <path d="M70 90h60M70 110h40" stroke="#9ca3af" strokeWidth="3" strokeLinecap="round"/>
-            <circle cx="85" cy="75" r="3" fill="#9ca3af"/>
-            <circle cx="115" cy="75" r="3" fill="#9ca3af"/>
-          </svg>
-        </div>
+      {/* Large Center Image */}
+      <div className="no-more-image-container">
+        <img
+          src="/src/pages/Matches/assets/images/no_more_options.png"
+          alt="No more options"
+          className="no-more-main-image"
+          onError={(e) => {
+            // Fallback if image not found
+            e.target.style.display = 'none'
+            e.target.nextElementSibling.style.display = 'block'
+          }}
+        />
+        {/* Fallback SVG */}
+        <svg
+          width="300"
+          height="300"
+          viewBox="0 0 300 300"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="no-more-fallback-svg"
+          style={{ display: 'none' }}
+        >
+          <circle cx="150" cy="150" r="120" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="3"/>
+          <path d="M100 130h100M100 170h80" stroke="#94a3b8" strokeWidth="4" strokeLinecap="round"/>
+          <circle cx="125" cy="110" r="5" fill="#94a3b8"/>
+          <circle cx="175" cy="110" r="5" fill="#94a3b8"/>
+          <path d="M120 200c20 20 40 20 60 0" stroke="#94a3b8" strokeWidth="3" strokeLinecap="round"/>
+        </svg>
+      </div>
 
-        {/* Text Content */}
-        <div className="no-more-text">
-          <h2 className="no-more-title">
-            No More Results
-          </h2>
-          <p className="no-more-description">
-            You've seen all the students currently looking for roommates near{' '}
-            <span className="university-highlight">{universityName}</span>.
-          </p>
-          <p className="no-more-suggestion">
-            Check back regularly as new students might join and are also looking for roommates near your school!
-          </p>
-        </div>
+      {/* Text Content Below Image */}
+      <div className="no-more-content">
+        <h1 className="no-more-title">
+          No More Results! 🎉
+        </h1>
+        <p className="no-more-description">
+          You've seen all the students currently looking for roommates at{' '}
+          <span className="university-highlight">{universityName}</span>
+        </p>
+        <p className="no-more-suggestion">
+          Check back regularly as new students might join and are also looking for roommates near your school!
+        </p>
 
         {/* Action Buttons */}
         <div className="no-more-actions">
-          <button 
+          <button
             onClick={() => navigate('/')}
-            className="back-home-btn"
+            className="primary-action-btn"
           >
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M7.5 15L2.5 10L7.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
             Back to Home
           </button>
-          
-          <button 
+
+          <button
             onClick={() => window.location.reload()}
-            className="refresh-btn"
+            className="secondary-action-btn"
           >
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M1 4v6h6M19 16v-6h-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -74,14 +73,26 @@ const NoMoreMatches = ({ universityName }) => {
           </button>
         </div>
 
-        {/* Tips */}
+        {/* Fun Tips Section */}
         <div className="no-more-tips">
-          <h3 className="tips-title">💡 Tips to find more matches:</h3>
-          <ul className="tips-list">
-            <li>Share RoomedIn with friends at your university</li>
-            <li>Check back in a few days for new students</li>
-            <li>Make sure your profile is complete and appealing</li>
-          </ul>
+          <div className="tips-header">
+            <span className="tips-emoji">💡</span>
+            <h3 className="tips-title">Ways to find more matches</h3>
+          </div>
+          <div className="tips-grid">
+            <div className="tip-item">
+              <span className="tip-emoji">👥</span>
+              <p>Share RoomedIn with friends at your university</p>
+            </div>
+            <div className="tip-item">
+              <span className="tip-emoji">⏰</span>
+              <p>Check back in a few days for new students</p>
+            </div>
+            <div className="tip-item">
+              <span className="tip-emoji">✨</span>
+              <p>Make sure your profile is complete and appealing</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
