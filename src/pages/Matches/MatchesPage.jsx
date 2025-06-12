@@ -4,7 +4,7 @@ import { useAuth } from '../../contexts/AuthContext'
 import Header from '../../components/Header/Header'
 import MatchCard from './components/MatchCard/MatchCard'
 import NoMoreMatches from './components/NoMoreMatches/NoMoreMatches'
-import { getUniversityMatches } from '../../services/MatchingService'
+import { getUniversityMatches } from '../../services/MatchingService.js'
 import './MatchesPage.css'
 
 const MatchesPage = () => {
