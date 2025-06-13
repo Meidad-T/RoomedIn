@@ -77,21 +77,102 @@ const MatchCard = ({ match, onSendRequest, onSkip, onReject }) => {
   // Get emoji for field
   const getEmojiForField = (field, value) => {
     const emojiMap = {
-      gender: { male: '👨', female: '👩', 'non-binary': '🧑', other: '👤' },
+      gender: {
+        male: '👨',
+        female: '👩',
+        'non-binary': '🧑',
+        other: '👤'
+      },
       major: '🎓',
-      smoking: { never: '🚭', occasionally: '🚬', regularly: '🚬', socially: '🚬' },
-      drinking: { never: '🚫', occasionally: '🍷', regularly: '🍺', socially: '🥂' },
-      pets: { none: '🚫', cats: '🐱', dogs: '🐶', both: '🐾', other: '🐹' },
-      cleanliness: { 'very-clean': '✨', clean: '🧹', average: '🏠', messy: '🌪️' },
-      studyHabits: { 'very-quiet': '🤫', quiet: '📚', moderate: '🎧', social: '👥' },
-      socialLevel: { introvert: '🏠', ambivert: '⚖️', extrovert: '🎉' },
-      sleepSchedule: { 'early-bird': '🌅', normal: '😴', 'night-owl': '🦉', irregular: '🔄' },
-      sexuality: { straight: '💙', gay: '🏳️‍🌈', lesbian: '🏳️‍🌈', bisexual: '💜', other: '❤️' },
-      religion: { christian: '✝️', muslim: '☪️', jewish: '✡️', hindu: '🕉️', buddhist: '☸️', other: '🙏', none: '🌟' }
+      smoking: {
+        never: '🚭',
+        occasionally: '🚬',
+        regularly: '🚬',
+        socially: '🚬'
+      },
+      drinking: {
+        never: '🚫',
+        occasionally: '🍷',
+        regularly: '🍺',
+        socially: '🥂'
+      },
+      pets: {
+        none: '🚫',
+        cat: '🐱',
+        cats: '🐱',
+        dog: '🐶',
+        dogs: '🐶',
+        both: '🐾',
+        other: '⭐',
+        bird: '🐦',
+        fish: '🐠',
+        rabbit: '🐰',
+        hamster: '🐹'
+      },
+      cleanliness: {
+        'very-clean': '✨',
+        clean: '🧹',
+        average: '🏠',
+        messy: '🌪️'
+      },
+      studyHabits: {
+        'very-quiet': '🤫',
+        quiet: '📚',
+        moderate: '🎧',
+        social: '👥',
+        'home-quiet': '🏠'
+      },
+      socialLevel: {
+        introvert: '🏠',
+        ambivert: '⚖️',
+        extrovert: '🎉',
+        moderate: '😊'
+      },
+      sleepSchedule: {
+        'early-bird': '🌅',
+        normal: '😴',
+        'night-owl': '🦉',
+        irregular: '🔄'
+      },
+      sexuality: {
+        straight: '💙',
+        gay: '🏳️‍🌈',
+        lesbian: '🏳️‍🌈',
+        bisexual: '💜',
+        pansexual: '💖',
+        asexual: '🖤',
+        other: '❤️'
+      },
+      religion: {
+        christian: '✝️',
+        christianity: '✝️',
+        muslim: '☪️',
+        islam: '☪️',
+        jewish: '✡️',
+        judaism: '✡️',
+        hindu: '🕉️',
+        hinduism: '🕉️',
+        buddhist: '☸️',
+        buddhism: '☸️',
+        sikh: '☬️',
+        sikhism: '☬️',
+        atheist: '🔬',
+        agnostic: '❓',
+        spiritual: '🌟',
+        other: '🙏',
+        none: '🌟',
+        'not-religious': '🌟'
+      }
     }
 
     if (field === 'major') return '🎓'
-    return emojiMap[field]?.[value] || '📝'
+
+    // Handle custom values for pets, religion, sexuality
+    if (field === 'pets' && value === 'other') return '⭐'
+    if (field === 'religion' && value === 'other') return '🙏'
+    if (field === 'sexuality' && value === 'other') return '❤️'
+
+    return emojiMap[field]?.[value] || emojiMap[field]?.[value?.toLowerCase()] || '❓'
   }
 
   // Calculate compatibility score (mock calculation)
