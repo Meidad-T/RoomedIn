@@ -19,22 +19,31 @@ const MatchCard = ({ match, onSendRequest, onSkip, onReject }) => {
     return `/images/profiles/profile_random_${imageNumber}.png`
   }
 
-  // Calculate age from birthday
-  const calculateAge = (birthday) => {
-    if (!birthday) return null
-    const today = new Date()
-    const birth = new Date(birthday)
-    let age = today.getFullYear() - birth.getFullYear()
-    const monthDiff = today.getMonth() - birth.getMonth()
-
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
-      age--
+  // Get age - use saved age if available, otherwise calculate from birthday
+  const getAge = () => {
+    // First try to use the saved age field
+    if (match.age && typeof match.age === 'number') {
+      return match.age
     }
 
-    return age
+    // Fallback to calculating from birthday
+    if (match.birthday) {
+      const today = new Date()
+      const birth = new Date(match.birthday)
+      let age = today.getFullYear() - birth.getFullYear()
+      const monthDiff = today.getMonth() - birth.getMonth()
+
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+        age--
+      }
+
+      return age
+    }
+
+    return null
   }
 
-  const age = calculateAge(match.birthday)
+  const age = getAge()
 
   // Format arrays for display
   const formatArray = (arr) => {

@@ -1,19 +1,19 @@
 /* Modern Match Card Container */
 .modern-match-container {
-  display: flex;
-  align-items: flex-start;
-  gap: 2rem;
-  justify-content: center;
   position: relative;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 600px;
 }
 
 /* Action Circle Buttons */
 .action-circle {
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   border: none;
   cursor: pointer;
@@ -21,9 +21,11 @@
   align-items: center;
   justify-content: center;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-  flex-shrink: 0;
-  position: relative;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
   overflow: hidden;
 }
 
@@ -42,6 +44,7 @@
 .reject-circle {
   background: linear-gradient(135deg, #ff6b6b, #ee5a52);
   color: white;
+  left: 60px;
 }
 
 .reject-circle::before {
@@ -49,8 +52,8 @@
 }
 
 .reject-circle:hover {
-  transform: scale(1.15) rotate(-5deg);
-  box-shadow: 0 16px 48px rgba(255, 107, 107, 0.4);
+  transform: translateY(-50%) scale(1.15) rotate(-5deg);
+  box-shadow: 0 20px 60px rgba(255, 107, 107, 0.4);
 }
 
 .reject-circle:hover::before {
@@ -60,6 +63,7 @@
 .match-circle {
   background: linear-gradient(135deg, var(--primary-green), #27ae60);
   color: white;
+  right: 60px;
 }
 
 .match-circle::before {
@@ -67,8 +71,8 @@
 }
 
 .match-circle:hover {
-  transform: scale(1.15) rotate(5deg);
-  box-shadow: 0 16px 48px rgba(46, 204, 113, 0.4);
+  transform: translateY(-50%) scale(1.15) rotate(5deg);
+  box-shadow: 0 20px 60px rgba(46, 204, 113, 0.4);
 }
 
 .match-circle:hover::before {
@@ -104,7 +108,7 @@
   border-radius: 28px;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  width: 380px;
+  width: 420px;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
   backdrop-filter: blur(10px);
@@ -706,8 +710,18 @@
   }
 
   .action-circle {
-    width: 48px;
-    height: 48px;
+    width: 64px;
+    height: 64px;
+    left: 30px !important;
+    right: 30px !important;
+  }
+
+  .reject-circle {
+    left: 30px !important;
+  }
+
+  .match-circle {
+    right: 30px !important;
   }
 
   .action-circle svg {
@@ -765,8 +779,18 @@
 
 @media (max-width: 480px) {
   .action-circle {
-    width: 44px;
-    height: 44px;
+    width: 56px;
+    height: 56px;
+    left: 20px !important;
+    right: 20px !important;
+  }
+
+  .reject-circle {
+    left: 20px !important;
+  }
+
+  .match-circle {
+    right: 20px !important;
   }
 
   .action-circle svg {

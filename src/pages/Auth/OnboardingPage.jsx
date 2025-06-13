@@ -228,16 +228,37 @@ const OnboardingPage = () => {
   const handleSubmit = async () => {
     try {
       setLoading(true)
-      
-      // Calculate age from birthday
-      const age = formData.birthday ? calculateAge(formData.birthday) : null
+
+      // Calculate age from birthday - try multiple sources
+      let age = null
+
+      // First try to use the age from the birthday step
+      if (formData.age && typeof formData.age === 'number') {
+        age = formData.age
+      }
+      // Fallback to calculating from birthday string
+      else if (formData.birthday) {
+        age = calculateAge(formData.birthday)
+      }
+      // Fallback to calculating from individual date components
+      else if (formData.birthMonth && formData.birthDay && formData.birthYear) {
+        const birthday = `${formData.birthYear}-${String(formData.birthMonth).padStart(2, '0')}-${String(formData.birthDay).padStart(2, '0')}`
+        age = calculateAge(birthday)
+      }
+
+      console.log('Age calculation:', {
+        formDataAge: formData.age,
+        formDataBirthday: formData.birthday,
+        birthComponents: { month: formData.birthMonth, day: formData.birthDay, year: formData.birthYear },
+        calculatedAge: age
+      })
 
       // Prepare user profile data (filter out undefined values)
       const rawProfileData = {
         // Personal Information
         firstName: formData.firstName,
         lastName: formData.lastName,
-        birthday: formData.birthday,
+        birthday: formData.birthday || `${formData.birthYear}-${String(formData.birthMonth).padStart(2, '0')}-${String(formData.birthDay).padStart(2, '0')}`,
         age: age,
 
         // University & Academic
@@ -276,12 +297,21 @@ const OnboardingPage = () => {
         searchIndexes: generateSearchIndexes(formData)
       }
 
-      // Filter out undefined values to prevent Firebase errors
+      // Filter out undefined values and ensure age is an integer
       const profileData = Object.fromEntries(
         Object.entries(rawProfileData).filter(([key, value]) => value !== undefined)
       )
-      
+
+      // Ensure age is saved as an integer, not null
+      if (profileData.age !== null && !isNaN(profileData.age)) {
+        profileData.age = parseInt(profileData.age, 10)
+      } else {
+        // If we still don't have a valid age, remove it from the data
+        delete profileData.age
+      }
+
       console.log('Saving user profile data:', profileData)
+      console.log('Age field type and value:', typeof profileData.age, profileData.age)
       await updateUserProfile(profileData)
       console.log('Profile saved successfully!')
       setShowSuccess(true)

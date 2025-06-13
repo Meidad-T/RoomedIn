@@ -30,13 +30,17 @@ const BirthdayStep = ({ data, onChange, onValidationChange }) => {
   useEffect(() => {
     const isValid = month && day && year && year >= 1950 && year <= new Date().getFullYear() - 16
     onValidationChange(isValid)
-    
+
     if (isValid) {
       const age = calculateAge(month, day, year)
-      onChange({ 
-        birthMonth: month, 
-        birthDay: day, 
+      // Create a proper birthday date string (YYYY-MM-DD format)
+      const birthday = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+
+      onChange({
+        birthMonth: month,
+        birthDay: day,
         birthYear: year,
+        birthday: birthday,
         age: age
       })
     }
