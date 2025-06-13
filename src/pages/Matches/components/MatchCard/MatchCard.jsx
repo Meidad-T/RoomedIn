@@ -126,17 +126,6 @@ const MatchCard = ({ match, onSendRequest, onSkip, onReject }) => {
 
   return (
     <div className="modern-match-container">
-      {/* Left Action Button */}
-      <button
-        onClick={onReject}
-        className="action-circle reject-circle"
-        title="Not interested"
-      >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
-        </svg>
-      </button>
-
       {/* Main Card Container */}
       <div className={`modern-match-card ${isExpanded ? 'expanded' : ''}`}>
         {/* Main Card */}
@@ -362,16 +351,30 @@ const MatchCard = ({ match, onSendRequest, onSkip, onReject }) => {
         </div>
       </div>
 
-      {/* Right Action Button */}
-      <button
-        onClick={onSendRequest}
-        className="action-circle match-circle"
-        title="Send chat request"
-      >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      </button>
+      {/* Bottom Action Buttons */}
+      <div className="bottom-actions">
+        <button
+          onClick={onReject}
+          className="bottom-action-btn reject-btn"
+          title="Not interested"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+          </svg>
+          <span>Reject</span>
+        </button>
+
+        <button
+          onClick={onSendRequest}
+          className="bottom-action-btn match-btn"
+          title="Send chat request"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          <span>Match</span>
+        </button>
+      </div>
     </div>
   )
 }
